@@ -109,6 +109,8 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 | This PC | Control Panel | Calculator | Notepad | Notepad++ | PowerToys | Terminal | 7-Zip |
 | NVIDIA Control Panel | Realtek Audio Console | HWiNFO64 | WinDirStat | VS Code | VLC | Chrome | Edge |
 
+> NVIDIA Control Panel and Realtek Audio Console are hardware-specific Store apps - pins for these will be silently skipped if the apps are not installed.
+
 - All folder shortcuts enabled (Settings, File Explorer, Documents, Downloads, Music, Pictures, Videos, Network, Personal folder)
 - **Start layout toggle** ("More pins" vs "More recommendations"): set manually after install via Settings → Personalization → Start - the registry key for this setting was not reliably identifiable across builds
 
@@ -170,7 +172,7 @@ Python installs (direct download - winget `--scope machine` unreliable for Pytho
 ## Prerequisites
 
 - **UEFI-capable machine** - GPT layout only; no legacy BIOS/CSM support
-- **Internet connection during setup** - winget installs require network during the specialize pass. WSL2 (`Microsoft-Windows-Subsystem-Linux` and `VirtualMachinePlatform`) are offline Windows components from the ISO and do not require internet.
+- **Internet connection during setup** - winget installs run post-logon and require network access. WSL2 (`Microsoft-Windows-Subsystem-Linux` and `VirtualMachinePlatform`) are offline Windows components from the ISO and do not require internet.
 - **Windows 11 25H2 ISO** - English International, 64-bit
     - SHA256: `66B7B4B71763ED6F9B2CE29326ED9284544DA6F5283D00329921540C01AAAEEA`
 - **Bootable USB** created with [WinDiskWriter](https://github.com/TechUnRestricted/WinDiskWriter) in ExFAT mode - required, modern Win11 ISOs have `install.wim` > 4 GB (FAT32 can't hold it)
@@ -182,9 +184,9 @@ Python installs (direct download - winget `--scope machine` unreliable for Pytho
 1. Download Windows 11 25H2 ISO from [microsoft.com/software-download/windows11](https://www.microsoft.com/software-download/windows11) - **English International**, **64-bit**
 2. Write ISO to USB with WinDiskWriter (ExFAT, UEFI boot, no Legacy BIOS sector)
 3. **Customise** - at minimum set your password (search `CHANGE_ME_PASSWORD` in the XML)
-4. Copy `configs/el-toro/autounattend.xml` to the **root** of the USB drive
-5. Boot from USB, press `Shift+F10` → `diskpart` → `list disk` to confirm disk numbering before proceeding
-6. Reboot from USB - setup completes unattended
+4. Boot from USB without `autounattend.xml` - press `Shift+F10` → `diskpart` → `list disk` to confirm disk numbering; shut down
+5. Copy `configs/el-toro/autounattend.xml` to the **root** of the USB drive
+6. Boot from USB again - setup completes unattended
 7. Wait ~10 minutes after first logon for `InstallApps.ps1` to complete
 8. Check `C:\Windows\Setup\Scripts\InstallApps.log` for status
 
@@ -334,7 +336,7 @@ oobeSystem pass:
 
 See [docs/discoveries.md](docs/discoveries.md) for full pe.cmd internals and other hard-won findings.
 
-**Winget installs** require internet during the specialize pass. `InstallApps.ps1` runs `winget source update` at startup to handle stale source caches on older ISOs.
+**Winget installs** require internet and run post-logon in `InstallApps.ps1`. `InstallApps.ps1` runs `winget source update` at startup to handle stale source caches on older ISOs.
 
 ---
 

@@ -46,7 +46,7 @@ Once `ConfigureStartPins` has been read by `StartMenuExperienceHost`, it is mark
 
 Deleting `start2.bin` and restarting `StartMenuExperienceHost` regenerates Start from ConfigureStartPins (if not yet consumed), but the regeneration process **overwrites** `VisiblePlaces` with a default value. The correct sequence is:
 
-1. Write `VisiblePlaces` to `HKU\DefaultUser` **before** deleting `start2.bin` - StartMenuExperienceHost encodes it into the regenerated binary during profile creation
+1. Write `VisiblePlaces` to `HKCU` (current user) **before** deleting `start2.bin` - StartMenuExperienceHost reads it and encodes it into the regenerated binary during the restart
 2. Write `VisiblePlaces` again after the Explorer restart as a safety net
 
 Setting it only after the restart is not sufficient - the value gets encoded into the binary during regeneration, not read from the registry at display time.
@@ -104,7 +104,7 @@ Restart-Service sshd
 
 ## Chrome desktop shortcut recreation
 
-Chrome recreates its desktop shortcut after post-install background tasks run. A single `Remove-Item` at install time is not enough. Workaround: register a delayed scheduled task that runs ~2 minutes after install and removes any remaining `.lnk` files.
+Chrome recreates its desktop shortcut after post-install background tasks run. A single `Remove-Item` at install time is not enough. The approach used in `InstallApps.ps1`: wait ~30 seconds after all installs complete, then remove any remaining `.lnk` files from the user and public desktops at the very end of the script.
 
 ---
 
