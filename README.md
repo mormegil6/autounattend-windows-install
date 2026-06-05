@@ -2,7 +2,7 @@
 [![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE?logo=powershell&logoColor=white)]()
 [![winget](https://img.shields.io/badge/winget-apps-blue)]()
 [![Based on Schneegans](https://img.shields.io/badge/based%20on-Schneegans%20generator-lightgrey)](https://schneegans.de/windows/unattend-generator/)
-[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-lightgrey)](https://unlicense.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 # AutoUnattend Windows Install
 
@@ -94,18 +94,18 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 - Desktop icons: **This PC**, **User's Files**, **Recycle Bin** - no Network, no Control Panel shortcut
 
 ### Start menu
-- Empty pinned list replaced with a custom 12-pin layout (2 rows of 6):
+- Empty pinned list replaced with a custom 16-pin layout (2 rows of 8):
 
-| | | | | | |
-|---|---|---|---|---|---|
-| This PC | Control Panel | Notepad++ | Notepad | Calculator | PowerToys |
-| Git Bash | 7-Zip | WinDirStat | Greenshot | VS Code | VLC |
+| | | | | | | | |
+|---|---|---|---|---|---|---|---|
+| This PC | Control Panel | Calculator | Notepad | Notepad++ | PowerToys | Terminal | 7-Zip |
+| NVIDIA Control Panel | Realtek Audio Console | HWiNFO64 | WinDirStat | VS Code | VLC | Chrome | Edge |
 
 - All folder shortcuts enabled (Settings, File Explorer, Documents, Downloads, Music, Pictures, Videos, Network, Personal folder)
-- "More pins" layout: **not automated** - set manually after install via Settings → Personalization → Start
+- **Start layout toggle** ("More pins" vs "More recommendations"): set manually after install via Settings → Personalization → Start - the registry key for this setting was not reliably identifiable across builds
 
 ### System configuration
-- Computer name: **EL-TORO**
+- Computer name: **EL_TORO**
 - Local account: **User** / `CHANGE_ME_PASSWORD` *(set before use - see [Customisation](#customisation))*
 - Password never expires
 - **Remote Desktop enabled** with NLA (Network Level Authentication) - compatible with the Windows App on macOS
@@ -130,7 +130,7 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 - **WSL2** Windows components pre-installed (no distro - install your preferred distro with `wsl --install Ubuntu` or similar)
 - WSL2 set as default version at first logon
 - **Git** installed via winget
-- **OpenSSH Server** installed post-logon, configured on port 41, firewall rule opened
+- **OpenSSH Server** installed post-logon (in `InstallApps.ps1`), configured on port 41, firewall rule opened. Port 41 is hardcoded - change the `sshd_config` patch in `InstallApps.ps1` and the firewall rule name if you want a different port.
 
 ### Pre-installed applications (via winget)
 All installed silently during setup, no interaction required:
@@ -153,7 +153,7 @@ Python installs (direct download - winget `--scope machine` unreliable for Pytho
 - **Python 3.13** - `InstallAllUsers=1 PrependPath=1`
 - **Python 2.7** - installed to `C:\Python27`, `python2` alias added
 
-`InstallApps.ps1` runs as an elevated scheduled task 6 minutes after first logon. A `winget upgrade --all` runs at the end.
+`InstallApps.ps1` runs as an elevated scheduled task 10 minutes after first logon (`StartWhenAvailable` is set, so it fires even if the machine reboots during the trigger window). A `winget upgrade --all` runs at the end.
 
 **Greenshot** gets a pre-configured `Greenshot.ini` seeded into the default user profile before first logon, so it launches already configured with your preferred hotkeys, output format, and save location.
 
@@ -162,7 +162,7 @@ Python installs (direct download - winget `--scope machine` unreliable for Pytho
 ## Prerequisites
 
 - **UEFI-capable machine** - GPT layout only; no legacy BIOS/CSM support
-- **Internet connection during setup** - winget installs and WSL2 require network during the specialize pass
+- **Internet connection during setup** - winget installs require network during the specialize pass. WSL2 (`Microsoft-Windows-Subsystem-Linux` and `VirtualMachinePlatform`) are offline Windows components from the ISO and do not require internet.
 - **Windows 11 25H2 ISO** - English International, 64-bit
     - SHA256: `66B7B4B71763ED6F9B2CE29326ED9284544DA6F5283D00329921540C01AAAEEA`
 - **Bootable USB** created with [WinDiskWriter](https://github.com/TechUnRestricted/WinDiskWriter) in ExFAT mode - required, modern Win11 ISOs have `install.wim` > 4 GB (FAT32 can't hold it)
@@ -177,7 +177,7 @@ Python installs (direct download - winget `--scope machine` unreliable for Pytho
 4. Copy `configs/el-toro/autounattend.xml` to the **root** of the USB drive
 5. Boot from USB, press `Shift+F10` → `diskpart` → `list disk` to confirm disk numbering before proceeding
 6. Reboot from USB - setup completes unattended
-7. Wait ~6 minutes after first logon for `InstallApps.ps1` to complete
+7. Wait ~10 minutes after first logon for `InstallApps.ps1` to complete
 8. Check `C:\Windows\Setup\Scripts\InstallApps.log` for status
 
 ---
@@ -208,9 +208,9 @@ These values are hardcoded and **must be changed** before use on a different mac
 
 ### Computer name
 ```xml
-<Path>Rename-Computer -NewName 'EL-TORO' ...</Path>
+<Path>Rename-Computer -NewName 'EL_TORO' ...</Path>
 ```
-Max 15 characters, no spaces, hyphens allowed.
+Max 15 characters, no spaces, hyphens and underscores allowed.
 
 ### Username
 `User` also appears in file paths - `C:\Users\User\Pictures\Screenshots` (Greenshot save location in `Greenshot.ini` and `UserOnce.ps1`). Search and replace all occurrences if you change it.
@@ -232,17 +232,17 @@ A small number of settings could not be fully automated:
 
 | Setting | Where | Why not automated |
 |---|---|---|
-| Start menu "More pins" layout | Settings → Personalization → Start | Registry key for this preference was not identifiable across Windows builds |
+| Start layout toggle ("More pins" vs "More recommendations") | Settings → Personalization → Start | Registry key not reliably identifiable across Windows builds |
+| Taskbar: unpin Store, pin Terminal | Right-click taskbar | Taskbar pin registry policy (`ConfigureTaskbarPins`) is only honoured on MDM-enrolled machines in 25H2 |
 | 7-Zip file associations | 7-Zip → Tools → Options → System tab | Windows 11 protects file association changes with a cryptographic hash tied to username/SID |
 | WSL2 distro | `wsl --install Ubuntu` (or your choice) | Distro is intentionally not pre-selected |
-| winget upgrade after install | Runs automatically at first logon | Nothing to do |
 
 ---
 
 ## Known limitations
 
 - **Start menu pins** may silently fail for apps whose `.lnk` path doesn't match expectations. PowerToys has changed shortcut names between releases - check `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\`.
-- **VisiblePlaces binary** (Start menu folder shortcuts) was extracted from Windows 11 23H2. Shell GUIDs are stable across updates but the format could change in a major revision.
+- **VisiblePlaces binary** (Start menu folder shortcuts) was extracted from the live 25H2 EL_TORO system. Shell GUIDs are stable across minor updates but the format could change in a major revision.
 - **Audio enhancements** are disabled at first logon. Devices added later are not covered - re-run the relevant registry entries or use the Sound control panel.
 - **Folder Details view** (`Mode=4`, `LogicalViewMode=1`) works on tested builds but the DWORD values are undocumented.
 - **Telemetry level 1** is the minimum on Home/Pro. Level 0 silently resets on these editions - not a bug.
@@ -286,8 +286,7 @@ The [Schneegans generator](https://schneegans.de/windows/unattend-generator/) pr
 
 #### 6. Taskbar pins
 - Checklist: Explorer, Edge, Terminal, Chrome, others
-- Generates `ConfigureTaskbarPins` XML (Base64-encoded in Specialize.ps1)
-- Always uses `PinListPlacement="Replace"`
+- **Note:** `ConfigureTaskbarPins` via registry is not supported on non-MDM machines in Windows 11 25H2. Taskbar pin configuration on unmanaged machines requires writing the `Taskband\Favorites` binary directly to the user hive, or a Provisioning Package.
 
 #### 7. Tweaks (checkboxes)
 - Dark/Light theme, taskbar alignment (left/center), search box style
@@ -327,9 +326,7 @@ oobeSystem pass:
 
 See [docs/discoveries.md](docs/discoveries.md) for full pe.cmd internals and other hard-won findings.
 
-**WSL2 components** are installed during the specialize pass which runs before the OOBE and requires internet access. If the machine has no network connection at install time, WSL2 installation will silently fail and can be completed manually afterwards with `wsl --install --no-distribution`.
-
-**Winget installs** also require internet during specialize. On a fresh ISO, winget itself may need a source update on first run - if apps fail to install, run `winget source update` and retry.
+**Winget installs** require internet during the specialize pass. `InstallApps.ps1` runs `winget source update` at startup to handle stale source caches on older ISOs.
 
 ---
 
@@ -339,6 +336,12 @@ Base answer file generated with [Schneegans Unattend Generator](https://schneega
 
 ---
 
-## Licence
+## License
 
-Do whatever you want with it. No warranty expressed or implied - test on a machine you can afford to wipe.
+MIT - see [LICENSE](./LICENSE).
+
+---
+
+## Contact
+
+Bartłomiej Mróz · bartlomiej.mroz@pg.edu.pl · Department of Multimedia Systems, Gdańsk University of Technology
