@@ -1,0 +1,1523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&GeoLocation=191&Locale=pl-PL&Keyboard=00000415&PEMode=Generated&InstallFromMode=Name&InstallFromName=Windows+11+Pro&PartitionMode=Unattended&TargetDisk=1&SystemSize=300&PartitionLayout=Automatic&RecoveryMode=Partition&RecoverySize=1000&DiskAssertionMode=Generated&AssertMinSize=100&AssertMaxSize=4000&AssertNoPartitions=true&AssertInterfaceType=true&AssertMediaType=true&WindowsEditionMode=Firmware&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=EL_TORO&TimeZoneMode=Explicit&TimeZone=Central+European+Standard+Time&UserAccountMode=Unattended&AccountName0=User&AccountDisplayName0=&AccountPassword0=&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&ShowFileExtensions=true&LaunchToThisPC=true&ShowEndTask=true&TaskbarSearch=Icon&TaskbarIconsMode=Default&DisableWidgets=true&LeftTaskbar=true&ShowAllTrayIcons=true&DisableBingResults=true&StartTilesMode=Default&StartPinsMode=Custom&StartPinsJson=%7B%0D%0A++%22pinnedList%22%3A+%5B%0D%0A++++%7B%0D%0A++++++%22desktopAppLink%22%3A+%22%25ALLUSERSPROFILE%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CMicrosoft+Edge.lnk%22%0D%0A++++%7D%2C%0D%0A++++%7B%0D%0A++++++%22desktopAppLink%22%3A+%22%25APPDATA%25%5C%5CMicrosoft%5C%5CWindows%5C%5CStart+Menu%5C%5CPrograms%5C%5CFile+Explorer.lnk%22%0D%0A++++%7D%2C%0D%0A++++%7B%0D%0A++++++%22packagedAppId%22%3A+%22windows.immersivecontrolpanel_cw5n1h2txyewy%21microsoft.windows.immersivecontrolpanel%22%0D%0A++++%7D%0D%0A++%5D%0D%0A%7D&DisableFastStartup=true&EnableLongPaths=true&EnableRemoteDesktop=true&DisableAppSuggestions=true&HideEdgeFre=true&DisableEdgeStartupBoost=true&CoreIsolationMode=Enabled&DeleteWindowsOld=true&EffectsMode=Appearance&DeleteEdgeDesktopIcon=true&DesktopIconsMode=Custom&IconRecycleBin=true&IconThisPC=true&IconUserFiles=true&StartFoldersMode=Custom&StartFolderDocuments=true&StartFolderDownloads=true&StartFolderFileExplorer=true&StartFolderMusic=true&StartFolderNetwork=true&StartFolderPersonalFolder=true&StartFolderPictures=true&StartFolderSettings=true&StartFolderVideos=true&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Default&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColor=%230078d4&AccentColorOnBorders=true&EnableTransparency=true&WallpaperMode=Default&LockScreenMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePhotos=false&RemoveRecall=true&RemoveSkype=true&RemoveSnippingTool=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveWallet=true&RemoveWeather=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveXboxApps=true&RemoveYourPhone=true&AppLockerMode=Skip-->
+	<settings pass="offlineServicing"></settings>
+	<settings pass="windowsPE">
+		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:@echo off&amp;echo:call :print ^"Setting keyboard layout for PE session^"&amp;echo:wpeutil.exe SetKeyboardLayout 0415:00000415&amp;echo:for ^%^%d in (C D E F G H I J K L M N O P Q T U V X Y Z^) do ()</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\sources\install.wim set ^"IMAGE_FILE=^%^%d:\sources\install.wim^"&amp;echo:if exist ^%^%d:\sources\install.esd set ^"IMAGE_FILE=^%^%d:\sources\install.esd^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\sources\install.swm set ^"IMAGE_FILE=^%^%d:\sources\install.swm^" ^&amp; set ^"SWM_PARAM=/SWMFile:^%^%d:\sources\install*.swm^"&amp;echo:if exist ^%^%d:\autounattend.xml set ^"XML_FILE=^%^%d:\autounattend.xml^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\$OEM$ set ^"OEM_FOLDER=^%^%d:\$OEM$^"&amp;echo:if exist ^%^%d:\$WinPEDriver$ set ^"PEDRIVERS_FOLDER=^%^%d:\$WinPEDriver$^"&amp;echo:^))</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3^" ^%^%t in ('reg.exe query HKLM\System\Setup /v UnattendFile 2^^^&gt;nul'^) do ( if exist ^%^%t set ^"XML_FILE=^%^%t^" ^))</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if not defined IMAGE_FILE call :fail ^"Could not locate install.wim, install.esd or install.swm.^"&amp;echo:if not defined XML_FILE call :fail ^"Could not locate autounattend.xml.^"&amp;echo:set ^"OS_VERSION=11^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>7</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3 delims=.^" ^%^%v in ('ver'^) do (&amp;echo:if ^%^%v LSS 20000 set ^"OS_VERSION=10^"&amp;echo:^)&amp;echo:if defined PEDRIVERS_FOLDER (&amp;echo:call :print ^"Loading drivers from $WinPEDriver$ folder^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>8</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /R ^%PEDRIVERS_FOLDER^% ^%^%f IN (*.inf^) do drvload.exe ^"^%^%f^"&amp;echo:^)&amp;echo:^&gt;X:\assert.vbs (&amp;echo:echo:Function Fail(message^^^)&amp;echo:echo:WScript.Echo message&amp;echo:echo:WScript.Quit 1&amp;echo:echo:End Function)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>9</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:On Error Resume Next&amp;echo:echo:Set wmi = GetObject(^^^"winmgmts:\\.\root\cimv2^^^"^^^)&amp;echo:echo:Set drive = wmi.Get(^^^"Win32_DiskDrive.DeviceID='\\.\PHYSICALDRIVE1'^^^"^^^)&amp;echo:echo:If Err.Number ^^^&lt;^^^&gt; 0 Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>10</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"Could not locate disk 1 (^^^" ^^^&amp; Err.Description ^^^&amp; ^^^"^^^).^^^"&amp;echo:echo:End If&amp;echo:echo:actual = drive.InterfaceType&amp;echo:echo:If actual ^^^&lt;^^^&gt; ^^^"IDE^^^" And actual ^^^&lt;^^^&gt; ^^^"SCSI^^^" Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>11</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"InterfaceType '^^^" ^^^&amp; actual ^^^&amp; ^^^"' of disk 1 is unexpected.^^^"&amp;echo:echo:End If&amp;echo:echo:actual = drive.MediaType&amp;echo:echo:If actual ^^^&lt;^^^&gt; ^^^"Fixed hard disk media^^^" Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>12</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"MediaType '^^^" ^^^&amp; actual ^^^&amp; ^^^"' of disk 1 is unexpected.^^^"&amp;echo:echo:End If&amp;echo:echo:actual = CInt( drive.Size / 1024 / 1024 / 1024 ^^^)&amp;echo:echo:expected = 100&amp;echo:echo:If actual ^^^&lt; expected Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>13</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"Size of disk 1 is expected to be at least ^^^" ^^^&amp; expected ^^^&amp; ^^^" GiB, but actually is ^^^" ^^^&amp; actual ^^^&amp; ^^^" GiB.^^^"&amp;echo:echo:End If&amp;echo:echo:actual = CInt( drive.Size / 1024 / 1024 / 1024 ^^^))</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>14</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:expected = 4000&amp;echo:echo:If actual ^^^&gt; expected Then&amp;echo:echo:Fail ^^^"Size of disk 1 is expected to be at most ^^^" ^^^&amp; expected ^^^&amp; ^^^" GiB, but actually is ^^^" ^^^&amp; actual ^^^&amp; ^^^" GiB.^^^"&amp;echo:echo:End If)</Path>
+				</RunSynchronousCommand>
+				
+				<RunSynchronousCommand wcm:action="add">
+					<Order>15</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:actual = drive.Partitions&amp;echo:echo:If actual ^^^&gt; 0 Then&amp;echo:echo:Fail ^^^"There are already ^^^" ^^^&amp; actual ^^^&amp; ^^^" partitions on disk 1.^^^"&amp;echo:echo:End If)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>16</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:WScript.Echo ^^^"Disk assertions were satisfied.^^^"&amp;echo:echo:WScript.Quit 0&amp;echo:^)&amp;echo:call :print ^"Running disk assertions^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>17</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:cscript.exe //E:vbscript ^"X:\assert.vbs^" //Nologo ^|^| call :fail ^"Disk assertion failed. Windows Setup will halt to avoid potential data loss.^"&amp;echo:^&gt;X:\GPT.txt (&amp;echo:echo:SELECT DISK=1&amp;echo:echo:CLEAN)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>18</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:CONVERT GPT&amp;echo:echo:CREATE PARTITION EFI SIZE=300&amp;echo:echo:FORMAT QUICK FS=FAT32 LABEL=^^^"System^^^"&amp;echo:echo:ASSIGN LETTER=S&amp;echo:echo:CREATE PARTITION MSR SIZE=16&amp;echo:echo:CREATE PARTITION PRIMARY)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>19</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:SHRINK MINIMUM=1000&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Windows^^^"&amp;echo:echo:ASSIGN LETTER=W&amp;echo:echo:CREATE PARTITION PRIMARY&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Recovery^^^"&amp;echo:echo:ASSIGN LETTER=R)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>20</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:SET ID=^^^"de94bba4-06d1-4d40-a16a-bfd50179d6ac^^^"&amp;echo:echo:GPT ATTRIBUTES=0x8000000000000001&amp;echo:^)&amp;echo:^&gt;X:\MBR.txt (&amp;echo:echo:SELECT DISK=1&amp;echo:echo:CLEAN&amp;echo:echo:CREATE PARTITION PRIMARY SIZE=300)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>21</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"System^^^"&amp;echo:echo:ASSIGN LETTER=S&amp;echo:echo:ACTIVE&amp;echo:echo:CREATE PARTITION PRIMARY&amp;echo:echo:SHRINK MINIMUM=1000&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Windows^^^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>22</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:ASSIGN LETTER=W&amp;echo:echo:CREATE PARTITION PRIMARY&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Recovery^^^"&amp;echo:echo:ASSIGN LETTER=R&amp;echo:echo:SET ID=27&amp;echo:^)&amp;echo:wpeutil.exe UpdateBootInfo)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>23</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3^" ^%^%t in ('reg.exe query HKLM\System\CurrentControlSet\Control /v PEFirmwareType'^) do (&amp;echo:if ^%^%t == 0x1 (&amp;echo:set ^"LAYOUT=MBR^"&amp;echo:^) else if ^%^%t == 0x2 (&amp;echo:set ^"LAYOUT=GPT^"&amp;echo:^) else ()</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>24</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :fail ^"Unexpected value ^%^%t.^"&amp;echo:^)&amp;echo:^)&amp;echo:call :print ^"The target disk will be configured with the ^%LAYOUT^% partition layout^"&amp;echo:call :print ^"diskpart will now partition and format your disk^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>25</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:diskpart.exe /s X:\^%LAYOUT^%.txt ^|^| call :fail ^"diskpart.exe encountered an error.^"&amp;echo:set ^"IMG_PARAM=/Name:^"Windows 11 Pro^"^"&amp;echo:call :print ^"Applying Windows image to target disk^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>26</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:dism.exe /Apply-Image /ImageFile:^%IMAGE_FILE^% ^%SWM_PARAM^% ^%IMG_PARAM^% /ApplyDir:W:\ /CheckIntegrity /Verify ^|^| call :fail ^"dism.exe encountered an error.^"&amp;echo:call :print ^"Making system partition bootable^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>27</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:bcdboot.exe W:\Windows /s S: ^|^| call :fail ^"bcdboot.exe encountered an error.^"&amp;echo:bcdedit.exe /set {fwbootmgr} bootsequence {bootmgr}&amp;echo:call :print ^"Copying answer file to target disk^"&amp;echo:mkdir W:\Windows\Panther)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>28</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:copy ^%XML_FILE^% W:\Windows\Panther\unattend.xml&amp;echo:if defined PEDRIVERS_FOLDER (&amp;echo:call :print ^"Adding drivers from $WinPEDriver$ folder to new installation^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>29</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:dism.exe /Add-Driver /Image:W:\ /Driver:^"^%PEDRIVERS_FOLDER^%^" /Recurse&amp;echo:^)&amp;echo:call :print ^"Setting time zone^"&amp;echo:dism.exe /Image:W:\ /Set-TimeZone:^"Central European Standard Time^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>30</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :print ^"Setting device setup region to Poland (GeoID 191^)^"&amp;echo:reg.exe LOAD HKLM\mount W:\Windows\System32\config\SOFTWARE)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>31</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:reg.exe ADD ^"HKLM\mount\Microsoft\Windows\CurrentVersion\Control Panel\DeviceRegion^" /v DeviceRegion /t REG_DWORD /d 191 /f&amp;echo:reg.exe UNLOAD HKLM\mount&amp;echo:call :print ^"Computer will now reboot^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>32</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:wpeutil.exe reboot&amp;echo:goto :eof&amp;echo::fail&amp;echo:echo:&amp;echo:echo:Fatal error: ^%~1&amp;echo:echo:&amp;echo:pause&amp;echo:exit 1&amp;echo::print&amp;echo:echo:&amp;echo:echo:*** ^%~1 ***&amp;echo:echo:&amp;echo:goto :eof)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>33</Order>
+					<Path>cmd.exe /c "X:\pe.cmd"</Path>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+	</settings>
+	<settings pass="generalize"></settings>
+	<settings pass="specialize">
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<ComputerName>EL_TORO</ComputerName>
+			<TimeZone>Central European Standard Time</TimeZone>
+		</component>
+		<component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>powershell.exe -WindowStyle "Normal" -NoProfile -Command "$xml = [xml]::new(); $xml.Load('C:\Windows\Panther\unattend.xml'); $sb = [scriptblock]::Create( $xml.unattend.Extensions.ExtractScript ); Invoke-Command -ScriptBlock $sb -ArgumentList $xml;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\Specialize.ps1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\DefaultUser.ps1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+	</settings>
+	<settings pass="auditSystem"></settings>
+	<settings pass="auditUser"></settings>
+	<settings pass="oobeSystem">
+		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<InputLocale>0415:00000415</InputLocale>
+			<SystemLocale>pl-PL</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UserLocale>pl-PL</UserLocale>
+		</component>
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<UserAccounts>
+				<LocalAccounts>
+					<LocalAccount wcm:action="add">
+						<Name>User</Name>
+						<DisplayName></DisplayName>
+						<Group>Administrators</Group>
+						<Password>
+							<Value>CHANGE_ME_PASSWORD</Value>
+							<PlainText>true</PlainText>
+						</Password>
+					</LocalAccount>
+				</LocalAccounts>
+			</UserAccounts>
+			<AutoLogon>
+				<Username>User</Username>
+				<Enabled>true</Enabled>
+				<LogonCount>1</LogonCount>
+				<Password>
+					<Value>CHANGE_ME_PASSWORD</Value>
+					<PlainText>true</PlainText>
+				</Password>
+			</AutoLogon>
+			<OOBE>
+				<ProtectYourPC>3</ProtectYourPC>
+				<HideEULAPage>true</HideEULAPage>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+				<HideOnlineAccountScreens>false</HideOnlineAccountScreens>
+			</OOBE>
+			<FirstLogonCommands>
+				<SynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<CommandLine>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\FirstLogon.ps1"</CommandLine>
+				</SynchronousCommand>
+			</FirstLogonCommands>
+		</component>
+	</settings>
+	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
+		<Build>
+			<Commit>
+				<Hash>bf1399141716a23e95ff2aa36a3e9ced61279ac7</Hash>
+				<GitHubUrl>https://github.com/cschneegans/unattend-generator/commit/bf1399141716a23e95ff2aa36a3e9ced61279ac7</GitHubUrl>
+			</Commit>
+		</Build>
+		<ExtractScript>
+param(
+    [xml] $Document
+);
+
+foreach( $file in $Document.unattend.Extensions.File ) {
+    $path = [System.Environment]::ExpandEnvironmentVariables( $file.GetAttribute( 'path' ) );
+    mkdir -Path( $path | Split-Path -Parent ) -ErrorAction 'SilentlyContinue';
+    $encoding = switch( [System.IO.Path]::GetExtension( $path ) ) {
+        { $_ -in '.ps1', '.xml' } { [System.Text.Encoding]::UTF8; }
+        { $_ -in '.reg', '.vbs', '.js' } { [System.Text.UnicodeEncoding]::new( $false, $true ); }
+        default { [System.Text.Encoding]::Default; }
+    };
+    $bytes = $encoding.GetPreamble() + $encoding.GetBytes( $file.InnerText.Trim() );
+    [System.IO.File]::WriteAllBytes( $path, $bytes );
+}
+		</ExtractScript>
+		<File path="C:\Windows\Setup\Scripts\RemovePackages.ps1">
+$selectors = @(
+	'Microsoft.Microsoft3DViewer';
+	'Microsoft.BingSearch';
+	'Clipchamp.Clipchamp';
+	'Microsoft.Copilot';
+	'Microsoft.549981C3F5F10';
+	'MicrosoftCorporationII.MicrosoftFamily';
+	'Microsoft.WindowsFeedbackHub';
+	'Microsoft.Getstarted';
+	'microsoft.windowscommunicationsapps';
+	'Microsoft.WindowsMaps';
+	'Microsoft.MixedReality.Portal';
+	'Microsoft.BingNews';
+	'Microsoft.MicrosoftOfficeHub';
+	'Microsoft.Office.OneNote';
+	'Microsoft.OutlookForWindows';
+	'Microsoft.MSPaint';
+	'Microsoft.People';
+	'Microsoft.SkypeApp';
+	'Microsoft.ScreenSketch';
+	'Microsoft.MicrosoftSolitaireCollection';
+	'Microsoft.MicrosoftStickyNotes';
+	'MicrosoftTeams';
+	'MSTeams';
+	'Microsoft.Todos';
+	'Microsoft.Wallet';
+	'Microsoft.BingWeather';
+	'Microsoft.Xbox.TCUI';
+	'Microsoft.XboxApp';
+	'Microsoft.XboxGameOverlay';
+	'Microsoft.XboxGamingOverlay';
+	'Microsoft.XboxIdentityProvider';
+	'Microsoft.XboxSpeechToTextOverlay';
+	'Microsoft.GamingApp';
+	'Microsoft.YourPhone';
+	'Microsoft.ZuneMusic';
+	'Microsoft.ZuneVideo';
+);
+$getCommand = {
+  Get-AppxProvisionedPackage -Online;
+};
+$filterCommand = {
+  $_.DisplayName -eq $selector;
+};
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Remove-AppxProvisionedPackage -AllUsers -Online -ErrorAction 'Continue';
+  }
+};
+$type = 'Package';
+$logfile = 'C:\Windows\Setup\Scripts\RemovePackages.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\RemoveCapabilities.ps1">
+$selectors = @(
+	'Browser.InternetExplorer';
+	'OneCoreUAP.OneSync';
+	'Microsoft.Windows.SnippingTool';
+	'App.StepsRecorder';
+	'Media.WindowsMediaPlayer';
+);
+$getCommand = {
+  Get-WindowsCapability -Online | Where-Object -Property 'State' -NotIn -Value @(
+    'NotPresent';
+    'Removed';
+  );
+};
+$filterCommand = {
+  ($_.Name -split '~')[0] -eq $selector;
+};
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Remove-WindowsCapability -Online -ErrorAction 'Continue';
+  }
+};
+$type = 'Capability';
+$logfile = 'C:\Windows\Setup\Scripts\RemoveCapabilities.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\RemoveFeatures.ps1">
+$selectors = @(
+	'Recall';
+	'Microsoft-SnippingTool';
+);
+$getCommand = {
+  Get-WindowsOptionalFeature -Online | Where-Object -Property 'State' -NotIn -Value @(
+    'Disabled';
+    'DisabledWithPayloadRemoved';
+  );
+};
+$filterCommand = {
+  $_.FeatureName -eq $selector;
+};
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Disable-WindowsOptionalFeature -Online -Remove -NoRestart -ErrorAction 'Continue';
+  }
+};
+$type = 'Feature';
+$logfile = 'C:\Windows\Setup\Scripts\RemoveFeatures.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\ShowAllTrayIcons.xml">
+&lt;Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"&gt;
+	&lt;Triggers&gt;
+		&lt;LogonTrigger&gt;
+			&lt;Repetition&gt;
+				&lt;Interval&gt;PT1M&lt;/Interval&gt;
+				&lt;StopAtDurationEnd&gt;false&lt;/StopAtDurationEnd&gt;
+			&lt;/Repetition&gt;
+			&lt;Enabled&gt;true&lt;/Enabled&gt;
+		&lt;/LogonTrigger&gt;
+	&lt;/Triggers&gt;
+	&lt;Principals&gt;
+		&lt;Principal id="Author"&gt;
+			&lt;GroupId&gt;S-1-5-32-545&lt;/GroupId&gt;
+			&lt;RunLevel&gt;LeastPrivilege&lt;/RunLevel&gt;
+		&lt;/Principal&gt;
+	&lt;/Principals&gt;
+	&lt;Settings&gt;
+		&lt;MultipleInstancesPolicy&gt;IgnoreNew&lt;/MultipleInstancesPolicy&gt;
+		&lt;DisallowStartIfOnBatteries&gt;false&lt;/DisallowStartIfOnBatteries&gt;
+		&lt;StopIfGoingOnBatteries&gt;false&lt;/StopIfGoingOnBatteries&gt;
+		&lt;AllowHardTerminate&gt;true&lt;/AllowHardTerminate&gt;
+		&lt;StartWhenAvailable&gt;false&lt;/StartWhenAvailable&gt;
+		&lt;RunOnlyIfNetworkAvailable&gt;false&lt;/RunOnlyIfNetworkAvailable&gt;
+		&lt;IdleSettings&gt;
+			&lt;StopOnIdleEnd&gt;true&lt;/StopOnIdleEnd&gt;
+			&lt;RestartOnIdle&gt;false&lt;/RestartOnIdle&gt;
+		&lt;/IdleSettings&gt;
+		&lt;AllowStartOnDemand&gt;true&lt;/AllowStartOnDemand&gt;
+		&lt;Enabled&gt;true&lt;/Enabled&gt;
+		&lt;Hidden&gt;false&lt;/Hidden&gt;
+		&lt;RunOnlyIfIdle&gt;false&lt;/RunOnlyIfIdle&gt;
+		&lt;WakeToRun&gt;false&lt;/WakeToRun&gt;
+		&lt;ExecutionTimeLimit&gt;PT72H&lt;/ExecutionTimeLimit&gt;
+		&lt;Priority&gt;7&lt;/Priority&gt;
+	&lt;/Settings&gt;
+	&lt;Actions Context="Author"&gt;
+		&lt;Exec&gt;
+			&lt;Command&gt;%windir%\System32\conhost.exe&lt;/Command&gt;
+			&lt;Arguments&gt;--headless %windir%\System32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle Hidden -NoProfile -NonInteractive -Command "Set-ItemProperty -Path 'Registry::HKCU\Control Panel\NotifyIconSettings\*' -Name 'IsPromoted' -Value 1 -Type 'DWord';"&lt;/Arguments&gt;
+		&lt;/Exec&gt;
+	&lt;/Actions&gt;
+&lt;/Task&gt;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\SetStartPins.ps1">
+$json = '{"pinnedList":[{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\This PC.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\Control Panel.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Calculator.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Notepad.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Notepad++.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\PowerToys (Preview)\\PowerToys (Preview).lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Terminal.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\7-Zip\\7-Zip File Manager.lnk"},{"packagedAppID":"NVIDIACorp.NVIDIAControlPanel_56jybvy8sckqj!App"},{"packagedAppID":"RealtekSemiconductorCorp.RealtekAudioControl_dt26b99r8h8gj!App"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\HWiNFO64.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\WinDirStat.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\Visual Studio Code.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\VideoLAN\\VLC media player.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk"},{"desktopAppLink":"%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Edge.lnk"}]}'
+if( [System.Environment]::OSVersion.Version.Build -lt 20000 ) {
+	return;
+}
+$key = 'Registry::HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start';
+New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
+Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
+		</File>
+		<File path="C:\Windows\Setup\Scripts\SetColorTheme.ps1">
+$lightThemeSystem = 0;
+$lightThemeApps = 0;
+$accentColorOnStart = 0;
+$enableTransparency = 1;
+$htmlAccentColor = '#0078D4';
+&amp; {
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize';
+		Force = $true;
+		Type = 'DWord';
+	};
+	Set-ItemProperty @params -Name 'SystemUsesLightTheme' -Value $lightThemeSystem;
+	Set-ItemProperty @params -Name 'AppsUseLightTheme' -Value $lightThemeApps;
+	Set-ItemProperty @params -Name 'ColorPrevalence' -Value $accentColorOnStart;
+	Set-ItemProperty @params -Name 'EnableTransparency' -Value $enableTransparency;
+};
+&amp; {
+	Add-Type -AssemblyName 'System.Drawing';
+	$accentColor = [System.Drawing.ColorTranslator]::FromHtml( $htmlAccentColor );
+
+	function ConvertTo-DWord {
+		param(
+			[System.Drawing.Color]
+			$Color
+		);
+						
+		[byte[]] $bytes = @(
+			$Color.R;
+			$Color.G;
+			$Color.B;
+			$Color.A;
+		);
+		return [System.BitConverter]::ToUInt32( $bytes, 0); 
+	}
+
+	$startColor = [System.Drawing.Color]::FromArgb( 0xD2, $accentColor );
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'StartColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'AccentColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\DWM' -Name 'AccentColor' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent';
+		Name = 'AccentPalette';
+	};
+	$palette = Get-ItemPropertyValue @params;
+	$index = 20;
+	$palette[ $index++ ] = $accentColor.R;
+	$palette[ $index++ ] = $accentColor.G;
+	$palette[ $index++ ] = $accentColor.B;
+	$palette[ $index++ ] = $accentColor.A;
+	Set-ItemProperty @params -Value $palette -Type 'Binary' -Force;
+};
+		</File>
+		<File path="C:\Windows\Setup\Scripts\Specialize.ps1">
+$scripts = @(
+	{
+		Remove-Item -LiteralPath 'C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk', 'C:\Windows\System32\OneDriveSetup.exe', 'C:\Windows\SysWOW64\OneDriveSetup.exe' -ErrorAction 'Continue';
+	};
+	{
+		Remove-Item -LiteralPath 'Registry::HKLM\Software\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate' -Force -ErrorAction 'SilentlyContinue';
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v ConfigureChatAutoInstall /t REG_DWORD /d 0 /f;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\RemovePackages.ps1';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\RemoveCapabilities.ps1';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\RemoveFeatures.ps1';
+	};
+	{
+		net.exe accounts /maxpwage:UNLIMITED;
+	};
+	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f
+	};
+	{
+		netsh.exe advfirewall firewall set rule group="@FirewallAPI.dll,-28752" new enable=Yes;
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f;
+	};
+	{
+		# Enable Wake-on-LAN via registry
+		Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4D36E972-E325-11CE-BFC1-08002BE10318}' -ErrorAction SilentlyContinue | ForEach-Object {
+			Set-ItemProperty -LiteralPath $_.PSPath -Name '*WakeOnMagicPacket' -Value 1 -Type DWord -ErrorAction SilentlyContinue;
+		};
+	};
+
+	{
+		# Write LayoutModification.json for UWP app pins at first user logon
+		$lmDir = 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell'
+		New-Item -Path $lmDir -ItemType Directory -Force | Out-Null
+		'{"pinnedList":[{"packagedAppId":"Microsoft.WindowsCalculator_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.WindowsNotepad_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"},{"packagedAppId":"NVIDIACorp.NVIDIAControlPanel_56jybvy8sckqj!App"},{"packagedAppId":"RealtekSemiconductorCorp.RealtekAudioControl_dt26b99r8h8gj!App"}]}' | Set-Content "$lmDir\LayoutModification.json" -Encoding UTF8;
+		# Also write LayoutModification.xml for taskbar pins (OEM approach)
+		'<LayoutModificationTemplate xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification" xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" Version="1"><CustomTaskbarLayoutCollection PinListPlacement="Replace"><defaultlayout:TaskbarLayout><taskbar:TaskbarPinList><taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\File Explorer.lnk"/><taskbar:DesktopApp DesktopApplicationLinkPath="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"/><taskbar:UWA AppUserModelID="Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"/></taskbar:TaskbarPinList></defaultlayout:TaskbarLayout></CustomTaskbarLayoutCollection></LayoutModificationTemplate>' | Set-Content "$lmDir\LayoutModification.xml" -Encoding UTF8;
+	};
+
+	{
+		Remove-Item -LiteralPath 'C:\Users\Public\Desktop\Microsoft Edge.lnk' -ErrorAction 'SilentlyContinue' -Verbose;
+	};
+	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v HideFirstRunExperience /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge\Recommended" /v BackgroundModeEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge\Recommended" /v StartupBoostEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\SetStartPins.ps1';
+	};
+	{
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimations" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMAeroPeekEnabled" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\SelectionFade" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMSaveThumbnailEnabled" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\CursorShadow" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewShadow" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ThumbnailsOrIcon" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewAlphaSelect" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DragFullWindows" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\FontSmoothing" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListBoxSmoothScrolling" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DropShadow" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+	};
+	{
+		# Copilot off
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f;
+	};
+	{
+		# Telemetry level 1
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f;
+	};
+	{
+		# Windows Update active hours 8-23
+		reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v ActiveHoursStart /t REG_DWORD /d 8 /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v ActiveHoursEnd /t REG_DWORD /d 23 /f;
+	};
+	{
+		# NumLock on at boot
+		Set-ItemProperty -LiteralPath 'Registry::HKEY_USERS\.DEFAULT\Control Panel\Keyboard' -Name 'InitialKeyboardIndicators' -Value '2' -Type String -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name 'InitialKeyboardIndicators' -Value '2' -Type String -Force;
+	};
+	{
+		# Assign drive letters: Disk 2 (render NVMe) -> D: and Disk 0 (18TB data) -> E:
+		$renderPart = Get-Disk -Number 2 -ErrorAction SilentlyContinue | Get-Partition -ErrorAction SilentlyContinue | Where-Object { $_.Type -notin @('System','Reserved','Recovery') -and $_.Size -gt 1GB } | Sort-Object Size -Descending | Select-Object -First 1;
+		if ($renderPart -and $renderPart.DriveLetter -ne 'D') { $renderPart | Set-Partition -NewDriveLetter D -ErrorAction SilentlyContinue; };
+		$dataPart = Get-Disk -Number 0 -ErrorAction SilentlyContinue | Get-Partition -ErrorAction SilentlyContinue | Where-Object { $_.Type -notin @('System','Reserved','Recovery') -and $_.Size -gt 1GB } | Sort-Object Size -Descending | Select-Object -First 1;
+		if ($dataPart -and $dataPart.DriveLetter -ne 'E') { $dataPart | Set-Partition -NewDriveLetter E -ErrorAction SilentlyContinue; };
+	};
+	{
+		# Developer Mode
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /v AllowDevelopmentWithoutDevLicense /t REG_DWORD /d 1 /f;
+	};
+	{
+		# WSL2 components
+		Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart -ErrorAction SilentlyContinue;
+		Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart -ErrorAction SilentlyContinue;
+	};
+	{
+		# Power settings
+		powercfg.exe /CHANGE standby-timeout-ac 0;
+		powercfg.exe /CHANGE monitor-timeout-ac 30;
+	};
+	{
+		# Additional Consumer Experience keys
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableCloudOptimizedContent /t REG_DWORD /d 1 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableConsumerAccountStateContent /t REG_DWORD /d 1 /f;
+	};
+	{
+		# Edge clean settings - disable all non-browser features
+		# Suppress Chrome desktop shortcut creation
+		reg.exe add "HKLM\SOFTWARE\Policies\Google\Chrome" /v CreateDesktopShortcut /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Google\Update" /v CreateDesktopShortcutDefault /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v NewTabPageContentEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v NewTabPageQuickLinksEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v NewTabPageAllowedBackgroundTypes /t REG_DWORD /d 3 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v HubsSidebarEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DiscoverEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v EdgeShoppingAssistantEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v PaymentMethodQueryEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v CryptoWalletEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v ShowMicrosoftRewards /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v ShowRecommendationsEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SpotlightExperiencesAndRecommendationsEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v PersonalizationReportingEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v MicrosoftEdgeInsiderPromotionEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v AutoImportAtFirstRun /t REG_DWORD /d 4 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v ImportBrowserDataOnEachLaunch /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v DiagnosticData /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SendSiteInfoToImproveServices /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v CopilotCDPPageContext /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v Microsoft365CopilotChatIconEnabled /t REG_DWORD /d 0 /f;
+	};
+
+	{
+		# Create This PC and Control Panel shortcuts for Start menu pins
+		$shell = New-Object -ComObject WScript.Shell;
+		$sc = $shell.CreateShortcut("$env:ProgramData\Microsoft\Windows\Start Menu\Programs\System Tools\This PC.lnk");
+		$sc.TargetPath = 'explorer.exe'; $sc.Arguments = 'shell:::{20D04FE0-3AEA-1069-A2D8-08002B30309D}'; $sc.IconLocation = '%SystemRoot%\System32\imageres.dll,104'; $sc.Save();
+		$sc2 = $shell.CreateShortcut("$env:ProgramData\Microsoft\Windows\Start Menu\Programs\System Tools\Control Panel.lnk");
+		$sc2.TargetPath = 'explorer.exe'; $sc2.Arguments = 'shell:::{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}'; $sc2.IconLocation = '%SystemRoot%\System32\shell32.dll,21'; $sc2.Save();
+	};
+
+	{
+		# Pre-seed Greenshot config to Default user profile
+		$dest = 'C:\Users\Default\AppData\Roaming\Greenshot';
+		New-Item -Path $dest -ItemType Directory -Force -ErrorAction SilentlyContinue;
+		Copy-Item -Path 'C:\Windows\Setup\Scripts\Greenshot.ini' -Destination $dest -Force;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to customize your Windows installation. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\Windows\Setup\Scripts\Specialize.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\UserOnce.ps1">
+$scripts = @(
+	{
+		Get-AppxPackage -Name 'Microsoft.Windows.Ai.Copilot.Provider' | Remove-AppxPackage;
+	};
+	{
+		Remove-Item -LiteralPath "${env:USERPROFILE}\Desktop\Microsoft Edge.lnk" -ErrorAction 'SilentlyContinue' -Verbose;
+		# Remove any other desktop shortcuts (apps may create them later via InstallApps)
+		Get-ChildItem -Path "$env:USERPROFILE\Desktop", "$env:PUBLIC\Desktop" -Filter '*.lnk' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'LaunchTo' -Type 'DWord' -Value 1;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxTaskbarMode' -Type 'DWord' -Value 1;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Type 'DWord' -Value 1 -Force;
+	};
+	{
+		New-Item -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Force;
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{5399e694-6ce5-4d6c-8fce-1d8870fdcba0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{b4bfcc3a-db2c-424c-b029-7fe99a87c641}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{a8cdff1c-4878-43be-b5fd-f8091c1c60d0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{374de290-123f-4565-9164-39c4925e467b}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{f874310e-b6b7-47dc-bc84-b9e6b38f5903}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{1cf1260c-4dd0-4ebb-811f-33c572699fde}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{f02c1a0d-be21-4350-88b0-7367fc96ef3c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{3add1653-eb32-4cb0-bbd7-dfa0abb5acca}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{645ff040-5081-101b-9f08-00aa002f954e}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{20d04fe0-3aea-1069-a2d8-08002b30309d}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{a0953c92-50dc-43bf-be83-3742fed03c9c}' -Value 1 -Type 'DWord';
+		New-Item -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Force;
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{5399e694-6ce5-4d6c-8fce-1d8870fdcba0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{b4bfcc3a-db2c-424c-b029-7fe99a87c641}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{a8cdff1c-4878-43be-b5fd-f8091c1c60d0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{374de290-123f-4565-9164-39c4925e467b}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{f874310e-b6b7-47dc-bc84-b9e6b38f5903}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{1cf1260c-4dd0-4ebb-811f-33c572699fde}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{f02c1a0d-be21-4350-88b0-7367fc96ef3c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{3add1653-eb32-4cb0-bbd7-dfa0abb5acca}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{645ff040-5081-101b-9f08-00aa002f954e}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{20d04fe0-3aea-1069-a2d8-08002b30309d}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{a0953c92-50dc-43bf-be83-3742fed03c9c}' -Value 1 -Type 'DWord';
+	};
+	{
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Start' -Name 'VisiblePlaces' -Value $( [convert]::FromBase64String('hghzUqpRQ0Kfeyd2WEZZ1LwkihQM1olCoIBu2buiSILO1TQtWvpDRYLyIubq93c8L7Nn496JVUO/zmHzexipNyAGC7BRfzJMqh40zFR/cxXFpbNChn30QoCkk/rKeoi1oAc/OArogEywWobbhF28TUqwvXRK+WhPi9ZDmAcdqLxEgXX+DQiuQovaNO2XtmOU') ) -Type 'Binary';
+	};
+	{
+		# Create Screenshots folder
+		New-Item -Path 'C:\Users\User\Pictures\Screenshots' -ItemType Directory -Force -ErrorAction SilentlyContinue;
+	};
+	{
+		# Taskbar: combine only when full, active monitor only
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Start_Layout' -Value 1 -Type DWord -Force;
+		New-Item -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Force -ErrorAction SilentlyContinue | Out-Null;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Name 'AllAppsViewMode' -Value 1 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'TaskbarGlomLevel' -Value 1 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'MMTaskbarMode' -Value 2 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'MMTaskbarGlomLevel' -Value 1 -Type DWord -Force;
+	};
+	{
+		# Accent color on title bars
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\DWM' -Name 'ColorPrevalence' -Value 1 -Type DWord -Force;
+	};
+	{
+		# Show Task View button
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowTaskViewButton' -Value 1 -Type DWord -Force;
+	};
+	{
+		# Force Details view on all folders
+		New-Item -Path 'Registry::HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell' -Force -ErrorAction SilentlyContinue;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell' -Name 'Mode' -Value 4 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell' -Name 'LogicalViewMode' -Value 1 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell' -Name 'FolderType' -Value 'NotSpecified' -Type String -Force;
+	};
+	{
+		# Disable web search in taskbar
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'BingSearchEnabled' -Value 0 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'CortanaConsent' -Value 0 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'AllowSearchToUseLocation' -Value 0 -Type DWord -Force;
+	};
+	{
+		# Hide Copilot button and Smart Clipboard
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowCopilotButton' -Value 0 -Type DWord -Force;
+		New-Item -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard' -Force -ErrorAction SilentlyContinue;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard' -Name 'Disabled' -Value 1 -Type DWord -Force;
+		# Remove extra keyboard layouts - keep only Polish Programmers (0415:00000415)
+		$langList = Get-WinUserLanguageList;
+		foreach ($lang in $langList) {
+			$extra = $lang.InputMethodTips | Where-Object { $_ -ne '0415:00000415' };
+			foreach ($tip in $extra) { $lang.InputMethodTips.Remove($tip) | Out-Null; }
+		}
+		Set-WinUserLanguageList $langList -Force -ErrorAction SilentlyContinue;
+		# Hide language bar
+		New-Item -Path 'Registry::HKCU\Software\Microsoft\CTF\LangBar' -Force -ErrorAction SilentlyContinue | Out-Null;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\CTF\LangBar' -Name 'ShowStatus' -Value 3 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\CTF\LangBar' -Name 'Label' -Value 1 -Type DWord -Force;
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\CTF\LangBar' -Name 'ExtraIconsOnMinimized' -Value 0 -Type DWord -Force;
+	};
+	{
+		# Audio enhancements off for all render devices
+		Get-ChildItem -Path 'Registry::HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render' -ErrorAction SilentlyContinue | ForEach-Object {
+			$fx = Join-Path $_.PSPath 'FxProperties';
+			if (Test-Path $fx) { Set-ItemProperty -LiteralPath $fx -Name '{1da5d803-d492-4edd-8c23-e0c0ffee7f0e},6' -Value 1 -Type DWord -Force -ErrorAction SilentlyContinue; }
+		};
+	};
+	{
+		# Set WSL2 as default version
+		wsl.exe --set-default-version 2;
+	};
+	{
+		# Apply themeA (Captured Motion / Windows 11 built-in theme)
+		Start-Process -FilePath 'C:\Windows\Resources\Themes\themeA.theme' -Wait;
+	};
+
+
+	{
+		Get-Process -Name 'explorer' -ErrorAction 'SilentlyContinue' | Where-Object -FilterScript {
+			$_.SessionId -eq ( Get-Process -Id $PID ).SessionId;
+		} | Stop-Process -Force;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to configure this user account. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "$env:TEMP\UserOnce.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\DefaultUser.ps1">
+$scripts = @(
+	{
+		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore" /f;
+	};
+	{
+		Remove-ItemProperty -LiteralPath 'Registry::HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'OneDriveSetup' -Force -ErrorAction 'Continue';
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f;
+	};
+	{
+		if( [System.Environment]::OSVersion.Version.Build -lt 20000 ) {
+			# Windows 10
+			Set-ItemProperty -LiteralPath 'Registry::HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer' -Name 'EnableAutoTray' -Type 'DWord' -Value 0 -Force;
+		} else {
+			# Windows 11
+			Register-ScheduledTask -TaskName 'ShowAllTrayIcons' -Xml $(
+				Get-Content -LiteralPath "C:\Windows\Setup\Scripts\ShowAllTrayIcons.xml" -Raw;
+			);
+		}
+	};
+	{
+		$names = @(
+		  'ContentDeliveryAllowed';
+		  'FeatureManagementEnabled';
+		  'OEMPreInstalledAppsEnabled';
+		  'PreInstalledAppsEnabled';
+		  'PreInstalledAppsEverEnabled';
+		  'SilentInstalledAppsEnabled';
+		  'SoftLandingEnabled';
+		  'SubscribedContentEnabled';
+		  'SubscribedContent-310093Enabled';
+		  'SubscribedContent-338387Enabled';
+		  'SubscribedContent-338388Enabled';
+		  'SubscribedContent-338389Enabled';
+		  'SubscribedContent-338393Enabled';
+		  'SubscribedContent-353694Enabled';
+		  'SubscribedContent-353696Enabled';
+		  'SubscribedContent-353698Enabled';
+		  'SystemPaneSuggestionsEnabled';
+		);
+		
+		foreach( $name in $names ) {
+		  reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v $name /t REG_DWORD /d 0 /f;
+		}
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" /v TaskbarEndTask /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\DWM" /v ColorPrevalence /t REG_DWORD /d 1 /f;
+	};
+	{
+		# Taskbar pins: File Explorer + Terminal + Edge (binary from configured session)
+		$tbBytes = [System.Convert]::FromBase64String('ALIFAAAUAB+Am9Q0QkUC8023gDiTlDRW4ZwFAAD+BEFQUFPsBAgAAwAAAAAAAAB8AgAAMVNQU1UoTJ95nzlLqNDh1C3h1fNhAAAAEQAAAAAfAAAAKAAAAE0AaQBjAHIAbwBzAG8AZgB0AC4AVwBpAG4AZABvAHcAcwBUAGUAcgBtAGkAbgBhAGwAXwA4AHcAZQBrAHkAYgAzAGQAOABiAGIAdwBlAAAAEQAAACcAAAAACwAAAP//AAARAAAADgAAAAATAAAAAgAAABEAAAAZAAAAABMAAAABAAAAhQAAABUAAAAAHwAAADoAAABNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMAVABlAHIAbQBpAG4AYQBsAF8AMQAuADIANAAuADEAMQAzADIAMQAuADAAXwB4ADYANABfAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQAAAGkAAAAFAAAAAB8AAAAsAAAATQBpAGMAcgBvAHMAbwBmAHQALgBXAGkAbgBkAG8AdwBzAFQAZQByAG0AaQBuAGEAbABfADgAdwBlAGsAeQBiADMAZAA4AGIAYgB3AGUAIQBBAHAAcAAAAMEAAAAPAAAAAB8AAABXAAAAQwA6AFwAUAByAG8AZwByAGEAbQAgAEYAaQBsAGUAcwBcAFcAaQBuAGQAbwB3AHMAQQBwAHAAcwBcAE0AaQBjAHIAbwBzAG8AZgB0AC4AVwBpAG4AZABvAHcAcwBUAGUAcgBtAGkAbgBhAGwAXwAxAC4AMgA0AC4AMQAxADMAMgAxAC4AMABfAHgANgA0AF8AXwA4AHcAZQBrAHkAYgAzAGQAOABiAGIAdwBlAAAAAAAdAAAAIAAAAABIAAAAqdKm1nRMwk2i7C5wcqX78wAAAADNAQAAMVNQU00L1IZpkDxEgZoqVAkNzOxNAAAADAAAAAAfAAAAHQAAAEkAbQBhAGcAZQBzAFwAUwBxAHUAYQByAGUAMQA1ADAAeAAxADUAMABMAG8AZwBvAC4AcABuAGcAAAAAAEkAAAACAAAAAB8AAAAbAAAASQBtAGEAZwBlAHMAXABTAHEAdQBhAHIAZQA0ADQAeAA0ADQATABvAGcAbwAuAHAAbgBnAAAAAABJAAAADQAAAAAfAAAAGwAAAEkAbQBhAGcAZQBzAFwAVwBpAGQAZQAzADEAMAB4ADEANQAwAEwAbwBnAG8ALgBwAG4AZwAAAAAAEQAAAAQAAAAAEwAAAKlNwf8RAAAABQAAAAATAAAA/////z0AAAATAAAAAB8AAAAVAAAASQBtAGEAZwBlAHMAXABMAGEAcgBnAGUAVABpAGwAZQAuAHAAbgBnAAAAAAARAAAADgAAAAATAAAAoQQAACUAAAALAAAAAB8AAAAJAAAAVABlAHIAbQBpAG4AYQBsAAAAAAA9AAAAFAAAAAAfAAAAFQAAAEkAbQBhAGcAZQBzAFwAUwBtAGEAbABsAFQAaQBsAGUALgBwAG4AZwAAAAAAAAAAADEAAAAxU1BTsRZtRK2NcEinSEAupD14jBUAAABkAAAAABUAAABVAwAAAAAAAAAAAABBAAAAMVNQUzDxJbfvRxoQpfECYIye66wlAAAACgAAAAAfAAAACQAAAFQAZQByAG0AaQBuAGEAbAAAAAAAAAAAAC0AAAAxU1BTs3ftDRTGbEWuWyhbONewGxEAAAAHAAAAABMAAAAAAAAAAAAAAAAAAAAAABIAAAArAO++KlybkWrs3AEEBWQAAAAdAO++AgBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMAVABlAHIAbQBpAG4AYQBsAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQAhAEEAcABwAAAABAUiAAAAHgDvvgIAVQBzAGUAcgBQAGkAbgBuAGUAZAAAAAQFAAAAoAEAADoAH4DIJzQfEFwQQqoDLuRSh9ZoJgABACYA774SAAAAwNUZUWDs3AFWaGt5YOzcAadxX49q7NwBFABWADEAAAAAALlcW4oRAFRhc2tCYXIAQAAJAAQA7765XNWAuVxbii4AAACWggAAAAAEAAAAAAAAAAAAAAAAAAAAWSGTAFQAYQBzAGsAQgBhAHIAAAAWAA4BMgCXAQAAgVjEOiAARklMRUVYfjEuTE5LAAB8AAkABADvvrlcW4q5XFuKLgAAAHGXAAAAABYAAAAAAAAAAABSAAAAAADb3JEARgBpAGwAZQAgAEUAeABwAGwAbwByAGUAcgAuAGwAbgBrAAAAQABzAGgAZQBsAGwAMwAyAC4AZABsAGwALAAtADIAMgAwADYANwAAABwAEgAAACsA774oDmCPauzcARwAQgAAAB0A774CAE0AaQBjAHIAbwBzAG8AZgB0AC4AVwBpAG4AZABvAHcAcwAuAEUAeABwAGwAbwByAGUAcgAAABwAIgAAAB4A774CAFUAcwBlAHIAUABpAG4AbgBlAGQAAAAcAAAAAFIBAAA6AB+AyCc0HxBcEEKqAy7kUofWaCYAAQAmAO++EgAAAMDVGVFg7NwBVmhreWDs3AEx6x+VauzcARQAVgAxAAAAAAC5XFuKEQBUYXNrQmFyAEAACQAEAO++uVzVgLlcW4ouAAAAloIAAAAABAAAAAAAAAAAAAAAAAAAAFkhkwBUAGEAcwBrAEIAYQByAAAAFgDAADIAjQkAALlcoYAgAE1JQ1JPU34xLkxOSwAAVgAJAAQA7765XGKKuVxiii4AAABYiQIAAAAGAAAAAAAAAAAAAAAAAAAACLEtAE0AaQBjAHIAbwBzAG8AZgB0ACAARQBkAGcAZQAuAGwAbgBrAAAAHAASAAAAKwDvvnI5IJVq7NwBHAAaAAAAHQDvvgIATQBTAEUAZABnAGUAAAAcACIAAAAeAO++AgBVAHMAZQByAFAAaQBuAG4AZQBkAAAAHAAAAABiAQAAOgAfgMgnNB8QXBBCqgMu5FKH1mgmAAEAJgDvvhIAAADoRATUEOrcAfymXfwQ6twBSCi70hXq3AEUAFYAMQAAAAAAtlzOkBEAVGFza0JhcgBAAAkABADvvrZcFIy2XM6QLgAAAPiCAAAAAAQAAAAAAAAAAAAAAAAAAADJxq4AVABhAHMAawBCAGEAcgAAABYA0AAyAM4IAAC2XG2OIABHT09HTEV+MS5MTksAAFQACQAEAO++tlzpkLZc6ZAuAAAAWGgCAAAACAAAAAAAAAAAAAAAAAAAANyOMABHAG8AbwBnAGwAZQAgAEMAaAByAG8AbQBlAC4AbABuAGsAAAAcABIAAAArAO++SCi70hXq3AEcABoAAAAdAO++AgBDAGgAcgBvAG0AZQAAABwAIgAAAB4A774CAFUAcwBlAHIAUABpAG4AbgBlAGQAAAAcABIAAAAsAO++2wdY22Ls3AEcAAAA/w==');
+		New-Item -Path 'Registry::HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband' -Force -ErrorAction SilentlyContinue | Out-Null;
+		Set-ItemProperty -LiteralPath 'Registry::HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband' -Name 'Favorites' -Value $tbBytes -Type Binary -Force;
+	};
+	{
+		# Start menu More Pins layout + List view for All Apps
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Start_Layout /t REG_DWORD /d 1 /f;
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Start" /v AllAppsViewMode /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "UnattendedSetup" /t REG_SZ /d "powershell.exe -WindowStyle \""Normal\"" -ExecutionPolicy \""Unrestricted\"" -NoProfile -File \""C:\Windows\Setup\Scripts\UserOnce.ps1\""" /f;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to modify the default user&#x2019;&#x2019;s registry hive. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\Windows\Setup\Scripts\DefaultUser.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\FirstLogon.ps1">
+$scripts = @(
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name 'AutoLogonCount' -Type 'DWord' -Force -Value 0;
+	};
+	{
+		cmd.exe /c "rmdir C:\Windows.old";
+	};
+	{
+		Remove-Item -LiteralPath @(
+		  'C:\Windows\Panther\unattend.xml';
+		  'C:\Windows\Panther\unattend-original.xml';
+		  'C:\Windows\Setup\Scripts\Wifi.xml';
+		) -Force -ErrorAction 'SilentlyContinue' -Verbose;
+	};
+	{
+		# Register elevated scheduled task for winget installs
+		# Done here (not Specialize) because User account must exist for SID resolution
+		$action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-WindowStyle Normal -ExecutionPolicy Unrestricted -NoProfile -File "C:\Windows\Setup\Scripts\InstallApps.ps1"';
+		$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(10);
+		$principal = New-ScheduledTaskPrincipal -UserId 'User' -LogonType Interactive -RunLevel Highest;
+		$settings = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Hours 2) -StartWhenAvailable;
+		Register-ScheduledTask -TaskName 'InstallApps' -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Force | Out-Null;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to finalize your Windows installation. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\Windows\Setup\Scripts\FirstLogon.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\Greenshot.ini">
+; Greenshot core configuration
+[Core]
+; The language in IETF format (e.g. en-US)
+Language=en-US
+; Hotkey for starting the region capture
+RegionHotkey=Ctrl + PrintScreen
+; Hotkey for starting the window capture
+WindowHotkey=PrintScreen
+; Hotkey for starting the fullscreen capture
+FullscreenHotkey=Shift + PrintScreen
+; Hotkey for starting the last region capture
+LastregionHotkey=Ctrl + Shift + PrintScreen
+; Hotkey for starting the IE capture
+IEHotkey=None
+; Is this the first time launch?
+IsFirstLaunch=False
+; Which destinations? Possible options (more might be added by plugins) are: Editor, FileDefault, FileWithDialog, Clipboard, Printer, EMail, Picker
+Destinations=FileNoDialog,Editor,Clipboard
+; Specify which formats we copy on the clipboard? Options are: PNG, HTML, HTMLDATAURL and DIB
+ClipboardFormats=DIB,PNG
+; Should the mouse be captured?
+CaptureMousepointer=False
+; Use interactive window selection to capture? (false=Capture active window)
+CaptureWindowsInteractive=True
+; Capture delay in millseconds.
+CaptureDelay=1000
+; The capture mode used to capture a screen. (Auto, FullScreen, Fixed)
+ScreenCaptureMode=Auto
+; The screen number to capture when using ScreenCaptureMode Fixed.
+ScreenToCapture=1
+; The capture mode used to capture a Window (Screen, GDI, Aero, AeroTransparent, Auto).
+WindowCaptureMode=Auto
+; Enable/disable capture all children, very slow but will make it possible to use this information in the editor.
+WindowCaptureAllChildLocations=False
+; The background color for a DWM window capture.
+DWMBackgroundColor=Transparent
+; Play a camera sound after taking a capture.
+PlayCameraSound=False
+; Show a notification from the systray when a capture is taken.
+ShowTrayNotification=False
+; Output file path.
+OutputFilePath=C:\Users\User\Pictures\Screenshots
+; If the target file already exists True will make Greenshot always overwrite and False will display a 'Save-As' dialog.
+OutputFileAllowOverwrite=True
+; Filename pattern for screenshot.
+OutputFileFilenamePattern=${capturetime:d"yyyy-MM-dd HH_mm_ss"}-${title}
+; Default file type for writing screenshots. (bmp, gif, jpg, png, tiff)
+OutputFileFormat=png
+; If set to true, than the colors of the output file are reduced to 256 (8-bit) colors
+OutputFileReduceColors=False
+; If set to true the amount of colors is counted and if smaller than 256 the color reduction is automatically used.
+OutputFileAutoReduceColors=False
+; Amount of colors to reduce to, when reducing
+OutputFileReduceColorsTo=256
+; When saving a screenshot, copy the path to the clipboard?
+OutputFileCopyPathToClipboard=False
+; SaveAs Full path?
+OutputFileAsFullpath=C:\Users\User\Pictures\Screenshots\2024-04-23 19_57_09-support - AURO-3D.png
+; JPEG file save quality in %.
+OutputFileJpegQuality=80
+; Ask for the quality before saving?
+OutputFilePromptQuality=False
+; The number for the ${NUM} in the filename pattern, is increased automatically after each save.
+OutputFileIncrementingNumber=1
+; Ask for print options when printing?
+OutputPrintPromptOptions=True
+; Allow rotating the picture for fitting on paper?
+OutputPrintAllowRotate=False
+; Allow growing the picture for fitting on paper?
+OutputPrintAllowEnlarge=False
+; Allow shrinking the picture for fitting on paper?
+OutputPrintAllowShrink=True
+; Center image when printing?
+OutputPrintCenter=True
+; Print image inverted (use e.g. for console captures)
+OutputPrintInverted=False
+; Force grayscale printing
+OutputPrintGrayscale=False
+; Force monorchrome printing
+OutputPrintMonochrome=False
+; Threshold for monochrome filter (0 - 255), lower value means less black
+OutputPrintMonochromeThreshold=127
+; Print footer on print?
+OutputPrintFooter=True
+; Footer pattern
+OutputPrintFooterPattern=${capturetime:d"D"} ${capturetime:d"T"} - ${title}
+; The wav-file to play when a capture is taken, loaded only once at the Greenshot startup
+NotificationSound=default
+; Use your global proxy?
+UseProxy=True
+; Enable/disable IE capture
+IECapture=False
+; Enable/disable IE field capture, very slow but will make it possible to annotate the fields of a capture in the editor.
+IEFieldCapture=False
+; Comma separated list of Window-Classes which need to be checked for a IE instance!
+WindowClassesToCheckForIE=AfxFrameOrView70,IMWindowClass
+; Sets how to compare the colors for the autocrop detection, the higher the more is 'selected'. Possible values are from 0 to 255, where everything above ~150 doesn't make much sense!
+AutoCropDifference=10
+; Comma separated list of Plugins which are allowed. If something in the list, than every plugin not in the list will not be loaded!
+IncludePlugins=
+; Comma separated list of Plugins which are NOT allowed.
+ExcludePlugins=
+; Comma separated list of destinations which should be disabled.
+ExcludeDestinations=
+; How many days between every update check? (0=no checks)
+UpdateCheckInterval=14
+; Last update check
+LastUpdateCheck=05/22/2026 11:43:49
+; Enable/disable the access to the settings, can only be changed manually in this .ini
+DisableSettings=False
+; Enable/disable the access to the quick settings, can only be changed manually in this .ini
+DisableQuickSettings=False
+; Disable the trayicon, can only be changed manually in this .ini
+DisableTrayicon=False
+; Hide expert tab in the settings, can only be changed manually in this .ini
+HideExpertSettings=False
+; Enable/disable thumbnail previews
+ThumnailPreview=True
+; List of productnames for which GDI capturing is skipped (using fallback).
+NoGDICaptureForProduct=intellij idea
+; List of productnames for which DWM capturing is skipped (using fallback).
+NoDWMCaptureForProduct=citrix ica client
+; Make some optimizations for usage with remote desktop
+OptimizeForRDP=False
+; Disable all optimizations for usage with remote desktop
+DisableRDPOptimizing=False
+; Optimize memory footprint, but with a performance penalty!
+MinimizeWorkingSetSize=False
+; Remove the corners from a window capture
+WindowCaptureRemoveCorners=True
+; Also check for unstable version updates
+CheckForUnstable=False
+; The fixes that are active.
+ActiveTitleFixes=Firefox,IE,Chrome
+; The regular expressions to match the title with.
+TitleFixMatcher.Firefox= - Mozilla Firefox.*
+TitleFixMatcher.IE= - (Microsoft|Windows) Internet Explorer.*
+TitleFixMatcher.Chrome= - Google Chrome.*
+; The replacements for the matchers.
+TitleFixReplacer.Firefox=
+TitleFixReplacer.IE=
+TitleFixReplacer.Chrome=
+; Enable a special DIB clipboard reader
+EnableSpecialDIBClipboardReader=True
+; The cutshape which is used to remove the window corners, is mirrorred for all corners
+WindowCornerCutShape=5,3,2,1,1
+; Specify what action is made if the tray icon is left clicked, if a double-click action is specified this action is initiated after a delay (configurable via the windows double-click speed)
+LeftClickAction=SHOW_CONTEXT_MENU
+; Specify what action is made if the tray icon is double clicked
+DoubleClickAction=OPEN_LAST_IN_EXPLORER
+; Sets if the zoomer is enabled
+ZoomerEnabled=True
+; Specify the transparency for the zoomer, from 0-1 (where 1 is no transparency and 0 is complete transparent. An usefull setting would be 0.7)
+ZoomerOpacity=1
+; Maximum length of submenu items in the context menu, making this longer might cause context menu issues on dual screen systems.
+MaxMenuItemLength=25
+; The 'to' field for the email destination (settings for Outlook can be found under the Office section)
+MailApiTo=
+; The 'CC' field for the email destination (settings for Outlook can be found under the Office section)
+MailApiCC=
+; The 'BCC' field for the email destination (settings for Outlook can be found under the Office section)
+MailApiBCC=
+; Optional command to execute on a temporary PNG file, the command should overwrite the file and Greenshot will read it back. Note: this command is also executed when uploading PNG's!
+OptimizePNGCommand=
+; Arguments for the optional command to execute on a PNG, {0} is replaced by the temp-filename from Greenshot. Note: Temp-file is deleted afterwards by Greenshot.
+OptimizePNGCommandArguments="{0}"
+; Version of Greenshot which created this .ini
+LastSaveWithVersion=1.3.0.0
+; When reading images from files or clipboard, use the EXIF information to correct the orientation
+ProcessEXIFOrientation=True
+; The last used region, for reuse in the capture last region
+LastCapturedRegion=302,125,1425,802
+; The capture is cropped with these settings, e.g. when you don't want to color around it -1,-1
+Win10BorderCrop=0,0
+; Defines the base size of the icons (e.g. for the buttons in the editor), default value 16,16 and it's scaled to the current DPI
+BaseIconSize=16,16
+; The connect timeout value for web requests, these are seconds
+WebRequestTimeout=100
+; The read/write timeout value for web requests, these are seconds
+WebRequestReadWriteTimeout=100
+
+; Greenshot ExternalCommand Plugin configuration
+[ExternalCommand]
+; The commands that are available.
+Commands=MS Paint
+; Redirect the standard error of all external commands, used to output as warning to the greenshot.log.
+RedirectStandardError=True
+; Redirect the standard output of all external commands, used for different other functions (more below).
+RedirectStandardOutput=True
+; Depends on 'RedirectStandardOutput': Show standard output of all external commands to the Greenshot log, this can be usefull for debugging.
+ShowStandardOutputInLog=False
+; Depends on 'RedirectStandardOutput': Parse the output and take the first found URI, if a URI is found than clicking on the notify bubble goes there.
+ParseForUri=True
+; Depends on 'RedirectStandardOutput': Place the standard output on the clipboard.
+OutputToClipboard=False
+; Depends on 'RedirectStandardOutput' &amp; 'ParseForUri': If an URI is found in the standard input, place it on the clipboard. (This overwrites the output from OutputToClipboard setting.)
+UriToClipboard=True
+; The commandline for the output command.
+Commandline.MS Paint=C:\Users\User\AppData\Local\Microsoft\WindowsApps\pbrush.exe
+; The arguments for the output command.
+Argument.MS Paint="{0}"
+; Should the command be started in the background.
+RunInbackground.MS Paint=True
+; If a build in command was deleted manually, it should not be recreated.
+DeletedBuildInCommands=
+
+; Greenshot editor configuration
+[Editor]
+; Last used colors
+RecentColors=
+; Field values, make sure the last used settings are re-used
+LastFieldValue.ArrowContainer.LINE_THICKNESS=System.Int32,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:14
+LastFieldValue.ArrowContainer.ARROWHEADS=System.Int32,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:2
+LastFieldValue.ArrowContainer.LINE_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Red
+LastFieldValue.ArrowContainer.FILL_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Transparent
+LastFieldValue.ArrowContainer.SHADOW=System.Boolean,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:True
+LastFieldValue.TextContainer.LINE_THICKNESS=System.Int32,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:0
+LastFieldValue.TextContainer.LINE_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Red
+LastFieldValue.TextContainer.SHADOW=System.Boolean,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:True
+LastFieldValue.TextContainer.FONT_ITALIC=System.Boolean,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:False
+LastFieldValue.TextContainer.FONT_BOLD=System.Boolean,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:False
+LastFieldValue.TextContainer.FILL_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Transparent
+LastFieldValue.TextContainer.FONT_FAMILY=System.String,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:Microsoft Sans Serif
+LastFieldValue.TextContainer.FONT_SIZE=System.Single,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:40
+LastFieldValue.TextContainer.TEXT_HORIZONTAL_ALIGNMENT=System.Drawing.StringAlignment,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Center
+LastFieldValue.TextContainer.TEXT_VERTICAL_ALIGNMENT=System.Drawing.StringAlignment,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Center
+LastFieldValue.EllipseContainer.LINE_THICKNESS=System.Int32,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:2
+LastFieldValue.EllipseContainer.LINE_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Red
+LastFieldValue.EllipseContainer.FILL_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Transparent
+LastFieldValue.EllipseContainer.SHADOW=System.Boolean,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:True
+LastFieldValue.RectangleContainer.LINE_THICKNESS=System.Int32,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:2
+LastFieldValue.RectangleContainer.LINE_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Red
+LastFieldValue.RectangleContainer.FILL_COLOR=System.Drawing.Color,System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a:Transparent
+LastFieldValue.RectangleContainer.SHADOW=System.Boolean,mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:False
+; Match the editor window size to the capture
+MatchSizeToCapture=False
+; Placement flags
+WindowPlacementFlags=None
+; Show command
+WindowShowCommand=ShowMaximized
+; Position of minimized window
+WindowMinPosition=-1,-1
+; Position of maximized window
+WindowMaxPosition=-1,-1
+; Position of normal window
+WindowNormalPosition=100,100,400,400
+; Reuse already open editor
+ReuseEditor=False
+; The smaller this number, the less smoothing is used. Decrease for detailed drawing, e.g. when using a pen. Increase for smoother lines. e.g. when you want to draw a smooth line. Minimal value is 1, max is 2147483647.
+FreehandSensitivity=3
+; Suppressed the 'do you want to save' dialog when closing the editor.
+SuppressSaveDialogAtClose=False
+; Settings for the drop shadow effect.
+DropShadowEffectSettings=Darkness:0.60|ShadowSize:7|ShadowOffset:-1,-1
+; Settings for the torn edge effect.
+TornEdgeEffectSettings=Darkness:0.60|ShadowSize:7|ShadowOffset:-1,-1|GenerateShadow:True|ToothHeight:12|HorizontalToothRange:20|VerticalToothRange:20|Edges:True,True,True,True
+; The size for the editor when it's opened without a capture
+DefaultEditorSize=500,500
+
+
+		</File>
+		<File path="C:\Windows\Setup\Scripts\InstallApps.ps1">
+# Runs elevated via scheduled task at first logon - no UAC prompts
+$log = 'C:\Windows\Setup\Scripts\InstallApps.log'
+"$(Get-Date) Starting InstallApps" | Out-File $log
+Start-Sleep -Seconds 300
+"$(Get-Date) Sleep done, updating winget sources" | Out-File $log -Append
+winget source update --disable-interactivity *>> $log
+"$(Get-Date) Source update done, installing apps" | Out-File $log -Append
+# NVIDIA driver first - ensures GPU is stable for the rest of the session
+winget install --id Greenshot.Greenshot --silent --accept-package-agreements --accept-source-agreements *>> $log
+# Override Greenshot ini after install (winget may reset it)
+$gsIniDest = "$env:APPDATA\Greenshot"
+New-Item -Path $gsIniDest -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path 'C:\Windows\Setup\Scripts\Greenshot.ini' -Destination $gsIniDest -Force
+winget install --id WinDirStat.WinDirStat --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id Microsoft.PowerToys --scope machine --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id Git.Git --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id Notepad++.Notepad++ --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id 7zip.7zip --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id Microsoft.VisualStudioCode --scope machine --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id VideoLAN.VLC --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id Google.Chrome --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id Microsoft.PowerShell --silent --accept-package-agreements --accept-source-agreements *>> $log
+winget install --id REALiX.HWiNFO --silent --accept-package-agreements --accept-source-agreements *>> $log
+# Copy HWiNFO shortcut to ASCII path for reliable Start menu pinning
+$hwReg = [char]0x00ae
+$hwSrc = "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\HWiNFO$hwReg 64\HWiNFO$hwReg 64.lnk"
+$hwDst = "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\HWiNFO64.lnk"
+if (Test-Path $hwSrc) { Copy-Item $hwSrc $hwDst -Force }
+# Python 3 - direct install from python.org (winget --scope machine unreliable)
+"$(Get-Date) Installing Python 3" | Out-File $log -Append
+$py3exe = "$env:TEMP\python3-installer.exe"
+Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe' -OutFile $py3exe -UseBasicParsing
+Start-Process $py3exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1 Include_launcher=1 AssociateFiles=0' -Wait
+Remove-Item $py3exe -Force -ErrorAction SilentlyContinue
+"$(Get-Date) Python 3 done" | Out-File $log -Append
+# Python 2.7 (EOL, not in winget - install directly)
+"$(Get-Date) Installing Python 2.7" | Out-File $log -Append
+$py2msi = "$env:TEMP\python-2.7.18.amd64.msi"
+Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi' -OutFile $py2msi -UseBasicParsing
+Start-Process msiexec.exe -ArgumentList "/i `"$py2msi`" /quiet /norestart TARGETDIR=C:\Python27 ADDLOCAL=ALL" -Wait
+# Create python2.exe so 'python2' works in terminal
+Copy-Item 'C:\Python27\python.exe' 'C:\Python27\python2.exe' -Force -ErrorAction SilentlyContinue
+# Add C:\Python27 to system PATH (after Python3 so 'python' still calls Python 3)
+$mp = [Environment]::GetEnvironmentVariable('PATH','Machine')
+if ($mp -notlike '*Python27*') { [Environment]::SetEnvironmentVariable('PATH', $mp + ';C:\Python27', 'Machine') }
+"$(Get-Date) Python 2.7 done" | Out-File $log -Append
+winget upgrade --all --silent --accept-package-agreements --accept-source-agreements *>> $log
+"$(Get-Date) All installs done" | Out-File $log -Append
+# Schedule a delayed Chrome shortcut cleanup (Chrome recreates shortcut after our cleanup)
+$action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-WindowStyle Hidden -Command "Start-Sleep 60; Remove-Item -Path \"C:\\Users\\User\\Desktop\\Google Chrome.lnk\" -Force -ErrorAction SilentlyContinue; Remove-Item -Path \"C:\\Users\\Public\\Desktop\\Google Chrome.lnk\" -Force -ErrorAction SilentlyContinue; Unregister-ScheduledTask -TaskName ChromeShortcutCleanup -Confirm:$false"'
+$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(2)
+Register-ScheduledTask -TaskName 'ChromeShortcutCleanup' -Action $action -Trigger $trigger -RunLevel Highest -Force -ErrorAction SilentlyContinue | Out-Null
+# Wait for Chrome/VLC background post-install tasks to finish
+Start-Sleep -Seconds 20
+# Remove desktop shortcuts created by installed apps
+$desktops = @(
+    "C:\Users\User\Desktop",
+    "$env:PUBLIC\Desktop",
+    [System.Environment]::GetFolderPath('CommonDesktopDirectory')
+) | Select-Object -Unique
+foreach ($d in $desktops) {
+    Get-ChildItem -Path $d -Filter '*.lnk' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
+}
+# Install OpenSSH Server (Feature-on-Demand) - done here post-logon where networking is up
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0 -ErrorAction SilentlyContinue | Out-Null
+Start-Service sshd -ErrorAction SilentlyContinue
+Set-Service -Name sshd -StartupType Automatic -ErrorAction SilentlyContinue
+# sshd_config only exists after the service first starts; now set port 41
+$sshdConf = 'C:\ProgramData\ssh\sshd_config'
+if (Test-Path $sshdConf) {
+    (Get-Content $sshdConf) -replace '#?Port 22','Port 41' | Set-Content $sshdConf
+    Restart-Service sshd -ErrorAction SilentlyContinue
+}
+New-NetFirewallRule -Name 'sshd-41' -DisplayName 'OpenSSH Server (port 41)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 41 -ErrorAction SilentlyContinue | Out-Null
+# Create .lnk shortcuts for Calculator, Notepad, Terminal with correct icons
+$wsh2 = New-Object -ComObject WScript.Shell
+$progDir = "$env:ProgramData\Microsoft\Windows\Start Menu\Programs"
+$expl = "$env:SystemRoot\explorer.exe"
+# Extract Calculator icon from package Assets (PNG-to-ICO conversion)
+$calcIco = $null
+try {
+    $calcPkg = Get-AppxPackage -Name Microsoft.WindowsCalculator -ErrorAction SilentlyContinue
+    if ($calcPkg) {
+        $assets = Join-Path $calcPkg.InstallLocation 'Assets'
+        # Get 32x32 Calculator icon PNG (targetsize-32 is already correct size, no downsampling needed)
+        $png = Get-ChildItem $assets -Filter 'CalculatorAppList.targetsize-32.png' -ErrorAction SilentlyContinue | Select-Object -First 1
+        if (-not $png) { $png = Get-ChildItem $assets -Filter 'CalculatorAppList.scale-200.png' -ErrorAction SilentlyContinue | Select-Object -First 1 }
+        if ($png -and $png.FullName) {
+            Add-Type -AssemblyName System.Drawing
+            $bmp = [System.Drawing.Bitmap]::new([string]$png.FullName)
+            $ico = [System.Drawing.Icon]::FromHandle($bmp.GetHicon())
+            $calcIco = 'C:\Windows\Setup\Scripts\CalcIcon.ico'
+            $fs = [System.IO.FileStream]::new([string]$calcIco, [System.IO.FileMode]::Create)
+            $ico.Save($fs); $fs.Close(); $ico.Dispose(); $bmp.Dispose()
+        }
+    }
+} catch {}
+# Create Calculator.lnk shortcut
+$calcLnk = $wsh2.CreateShortcut("$progDir\Calculator.lnk")
+$calcLnk.TargetPath = $expl
+$calcLnk.Arguments = 'shell:AppsFolder\Microsoft.WindowsCalculator_8wekyb3d8bbwe!App'
+if ($calcIco -and (Test-Path $calcIco)) { $calcLnk.IconLocation = "$calcIco,0" }
+$calcLnk.Save()
+
+# Extract Terminal icon from package Assets (same approach as Calculator)
+$termIco = $null
+try {
+    # Try Get-AppxPackage first (reliable on fresh install after winget upgrade)
+    $termPkg = Get-AppxPackage -Name Microsoft.WindowsTerminal -ErrorAction SilentlyContinue
+    $termLoc = if ($termPkg -and (Test-Path (Join-Path $termPkg.InstallLocation 'Assets'))) {
+        $termPkg.InstallLocation
+    } else {
+        # Fallback: find any Terminal version with Assets accessible
+        $found = Get-ChildItem 'C:\Program Files\WindowsApps' -Filter 'Microsoft.WindowsTerminal_*_x64__8wekyb3d8bbwe' -ErrorAction SilentlyContinue |
+                 Where-Object { Test-Path (Join-Path $_.FullName 'Assets') } |
+                 Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        if ($found) { $found.FullName } else { $null }
+    }
+    if ($termLoc) {
+        $termAssets = Join-Path $termLoc 'Assets'
+        $termPng = Get-ChildItem $termAssets -Filter 'Terminal_*targetsize-32*.png' -ErrorAction SilentlyContinue |
+                   Where-Object { $_.Name -notmatch 'contrast|unplated' } | Select-Object -First 1
+        if (-not $termPng) {
+            $termPng = Get-ChildItem $termAssets -Filter '*.png' -ErrorAction SilentlyContinue |
+                       Where-Object { $_.Name -match 'targetsize-32' -and $_.Name -notmatch 'contrast|unplated' } | Select-Object -First 1
+        }
+        if (-not $termPng) {
+            $termPng = Get-ChildItem $termAssets -Filter '*.png' -ErrorAction SilentlyContinue |
+                       Sort-Object Length -Descending | Select-Object -First 1
+        }
+        if ($termPng -and $termPng.FullName) {
+            Add-Type -AssemblyName System.Drawing
+            $bmp = [System.Drawing.Bitmap]::new([string]$termPng.FullName)
+            $ico = [System.Drawing.Icon]::FromHandle($bmp.GetHicon())
+            $termIco = 'C:\Windows\Setup\Scripts\TerminalIcon.ico'
+            $fs = [System.IO.FileStream]::new([string]$termIco, [System.IO.FileMode]::Create)
+            $ico.Save($fs); $fs.Close(); $ico.Dispose(); $bmp.Dispose()
+        }
+    }
+} catch {}
+
+# Extract Notepad icon from current package exe to stable .ico path
+$notepadIco = $null
+try {
+    $notepadPkg = Get-AppxPackage -Name Microsoft.WindowsNotepad -ErrorAction SilentlyContinue
+    if ($notepadPkg) {
+        $notepadExe = Join-Path (Join-Path $notepadPkg.InstallLocation 'Notepad') 'Notepad.exe'
+        if (Test-Path $notepadExe) {
+            Add-Type -AssemblyName System.Drawing
+            $ico = [System.Drawing.Icon]::ExtractAssociatedIcon([string]$notepadExe)
+            $notepadIco = 'C:\Windows\Setup\Scripts\NotepadIcon.ico'
+            $fs = [System.IO.FileStream]::new([string]$notepadIco, [System.IO.FileMode]::Create)
+            $ico.Save($fs); $fs.Close(); $ico.Dispose()
+        }
+    }
+} catch {}
+
+@{
+    'Notepad.lnk'    = @{ A='shell:AppsFolder\Microsoft.WindowsNotepad_8wekyb3d8bbwe!App';    P='Microsoft.WindowsNotepad';    E='Notepad.exe'; Sub='Notepad'; UseNotepadIco=$true }
+    'Terminal.lnk'   = @{ A='shell:AppsFolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App';   P='Microsoft.WindowsTerminal';   E='wt.exe'; UseTermIco=$true }
+}.GetEnumerator() | ForEach-Object {
+    try {
+        $info = $_.Value
+        $lnk = $wsh2.CreateShortcut("$progDir\$($_.Key)")
+        $lnk.TargetPath = $expl
+        $lnk.Arguments = $info.A
+        $pkg = Get-AppxPackage -Name $info.P -ErrorAction SilentlyContinue
+        if ($pkg) {
+            if ($info.ContainsKey('UseTermIco') -and $termIco -and (Test-Path $termIco)) {
+                $lnk.IconLocation = "$termIco,0"
+            } elseif ($info.ContainsKey('UseNotepadIco') -and $notepadIco -and (Test-Path $notepadIco)) {
+                $lnk.IconLocation = "$notepadIco,0"
+            } elseif ($info.ContainsKey('I')) {
+                $lnk.IconLocation = "$($info.I),0"
+            } else {
+                $subDir = if ($info.ContainsKey('Sub')) { $info.Sub } else { '' }
+                $exePath = if ($subDir) { Join-Path (Join-Path $pkg.InstallLocation $subDir) $info.E } else { Join-Path $pkg.InstallLocation $info.E }
+                if (-not (Test-Path $exePath)) {
+                    $found = Get-ChildItem $pkg.InstallLocation -Filter $info.E -ErrorAction SilentlyContinue | Select-Object -First 1
+                    if ($found) { $exePath = $found.FullName }
+                }
+                if ($exePath -and (Test-Path $exePath)) { $lnk.IconLocation = "$exePath,0" }
+            }
+        }
+        $lnk.Save()
+    } catch {}
+}
+# Re-apply Start menu pins now that apps are installed
+&amp; 'C:\Windows\Setup\Scripts\SetStartPins.ps1'
+Start-Sleep -Seconds 3
+# Fallback: create Screenshots folder if UserOnce didn't
+New-Item -Path 'C:\Users\User\Pictures\Screenshots' -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+# Fallback: set search box to icon only
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxTaskbarMode' -Value 1 -Type DWord -Force -ErrorAction SilentlyContinue
+# Fallback: apply themeA if still on aero (UserOnce may have crashed before reaching theme step)
+$currentTheme = (Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes' -ErrorAction SilentlyContinue).CurrentTheme
+if ($currentTheme -notlike '*themeA*') {
+    Start-Process 'C:\Windows\Resources\Themes\themeA.theme'
+    Start-Sleep -Seconds 5
+}
+# Re-apply taskbar settings (UserOnce may have been reset by theme application)
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'TaskbarGlomLevel' -Value 1 -Type DWord -Force
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'MMTaskbarMode' -Value 2 -Type DWord -Force
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'MMTaskbarGlomLevel' -Value 1 -Type DWord -Force
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Start_Layout' -Value 1 -Type DWord -Force
+New-Item -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Force -ErrorAction SilentlyContinue | Out-Null
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Name 'AllAppsViewMode' -Value 1 -Type DWord -Force
+# Configure Windows Terminal settings
+$terminalSettings = @{
+    '$help' = 'https://aka.ms/terminal-documentation'
+    '$schema' = 'https://aka.ms/terminal-profiles-schema'
+    'defaultProfile' = '{574e775e-4f2a-5b96-ac1e-a2962a402336}'
+    'copyOnSelect' = $true
+    'copyFormatting' = 'none'
+    'useAcrylicInTabRow' = $true
+    'initialCols' = 80
+    'initialRows' = 20
+    'newTabMenu' = @(@{ 'type' = 'remainingProfiles' })
+    'profiles' = @{
+        'defaults' = @{ 'useAtlasEngine' = $true }
+    }
+    'schemes' = @()
+}
+$termDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
+New-Item -Path $termDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+$terminalSettings | ConvertTo-Json -Depth 10 | Set-Content "$termDir\settings.json" -Encoding UTF8
+# Set Windows Terminal as default terminal app
+New-Item -Path 'HKCU:\Console\%%Startup' -Force -ErrorAction SilentlyContinue | Out-Null
+Set-ItemProperty -Path 'HKCU:\Console\%%Startup' -Name 'DelegationConsole' -Value '{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}' -Type String -Force
+Set-ItemProperty -Path 'HKCU:\Console\%%Startup' -Name 'DelegationTerminal' -Value '{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}' -Type String -Force
+# Set VisiblePlaces BEFORE deleting start2.bin so it gets encoded into regenerated start2.bin
+$vpBytes = [System.Convert]::FromBase64String('hghzUqpRQ0Kfeyd2WEZZ1LwkihQM1olCoIBu2buiSILO1TQtWvpDRYLyIubq93c8L7Nn496JVUO/zmHzexipNyAGC7BRfzJMqh40zFR/cxXFpbNChn30QoCkk/rKeoi1oAc/OArogEywWobbhF28TUqwvXRK+WhPi9ZDmAcdqLxEgXX+DQiuQovaNO2XtmOU')
+New-Item -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Force -ErrorAction SilentlyContinue | Out-Null
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Name 'VisiblePlaces' -Value $vpBytes -Type Binary -ErrorAction SilentlyContinue
+# NOW delete start2.bin - StartMenuExperienceHost regenerates it with VisiblePlaces already set
+$start2 = "$env:LOCALAPPDATA\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start2.bin"
+if (Test-Path $start2) { Remove-Item $start2 -Force -ErrorAction SilentlyContinue }
+Stop-Process -Name 'StartMenuExperienceHost' -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 30
+# Restart Explorer so Start menu refreshes with resolved pins
+Get-Process explorer | Where-Object { $_.SessionId -eq (Get-Process -Id $PID).SessionId } | Stop-Process -Force
+Start-Sleep -Seconds 15
+# Safety net: re-apply VisiblePlaces after Explorer restart
+$vpBytes2 = [System.Convert]::FromBase64String('hghzUqpRQ0Kfeyd2WEZZ1LwkihQM1olCoIBu2buiSILO1TQtWvpDRYLyIubq93c8L7Nn496JVUO/zmHzexipNyAGC7BRfzJMqh40zFR/cxXFpbNChn30QoCkk/rKeoi1oAc/OArogEywWobbhF28TUqwvXRK+WhPi9ZDmAcdqLxEgXX+DQiuQovaNO2XtmOU')
+New-Item -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Force -ErrorAction SilentlyContinue | Out-Null
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Start' -Name 'VisiblePlaces' -Value $vpBytes2 -Type Binary -ErrorAction SilentlyContinue
+# Re-apply Taskband binary after Explorer restart (Explorer restart resets taskbar to defaults)
+$tbBytes2 = [System.Convert]::FromBase64String('hghzUqpRQ0Kfeyd2WEZZ1LwkihQM1olCoIBu2buiSILO1TQtWvpDRYLyIubq93c8L7Nn496JVUO/zmHzexipNyAGC7BRfzJMqh40zFR/cxXFpbNChn30QoCkk/rKeoi1oAc/OArogEywWobbhF28TUqwvXRK+WhPi9ZDmAcdqLxEgXX+DQiuQovaNO2XtmOU')
+New-Item -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband' -Force -ErrorAction SilentlyContinue | Out-Null
+Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband' -Name 'Favorites' -Value $tbBytes2 -Type Binary -Force -ErrorAction SilentlyContinue
+# Delayed Chrome shortcut cleanup (Chrome recreates shortcut after install)
+Start-Sleep -Seconds 30
+Remove-Item -Path 'C:\Users\User\Desktop\Google Chrome.lnk' -Force -ErrorAction SilentlyContinue
+Remove-Item -Path 'C:\Users\Public\Desktop\Google Chrome.lnk' -Force -ErrorAction SilentlyContinue
+Unregister-ScheduledTask -TaskName 'InstallApps' -Confirm:$false -ErrorAction SilentlyContinue
+		</File>
+	</Extensions>
+</unattend>
