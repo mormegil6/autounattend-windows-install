@@ -348,9 +348,7 @@ Base answer file generated with [Schneegans Unattend Generator](https://schneega
 
 ## License
 
-MIT - see [LICENSE](./LICENSE).
-
----
+This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
