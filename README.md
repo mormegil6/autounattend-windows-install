@@ -20,12 +20,20 @@ autounattend/
 ├── configs/
 │   └── el-toro/
 │       ├── README.md            # EL_TORO hardware, what works, known issues
-│       ├── autounattend.xml     # Password scrubbed - set CHANGE_ME_PASSWORD before use
-│       ├── Greenshot.ini
-│       └── scripts/
-│           ├── Specialize.ps1
-│           ├── InstallApps.ps1
-│           └── ... (all others)
+│       ├── autounattend.xml     # Main answer file - copy to USB root before install
+│       ├── Greenshot.ini        # Pre-configured Greenshot settings (seeded before first logon)
+│       └── scripts/             # Extracted from autounattend.xml for inspection/editing
+│           ├── Specialize.ps1           # System config: bloatware, theme, registry tweaks, WoL, drive letters
+│           ├── InstallApps.ps1          # App installs via winget + Python; runs ~10 min after first logon
+│           ├── UserOnce.ps1             # Per-user settings: theme, taskbar, folder view, Greenshot, Terminal
+│           ├── DefaultUser.ps1          # Applied to Default user hive before any profile is created
+│           ├── FirstLogon.ps1           # Registers InstallApps scheduled task; runs at first logon as SYSTEM
+│           ├── SetStartPins.ps1         # Applies ConfigureStartPins JSON; called from InstallApps
+│           ├── RemoveCapabilities.ps1   # Windows capabilities to remove (Steps Recorder, IE, OneSync)
+│           ├── RemoveFeatures.ps1       # Windows optional features to remove
+│           ├── RemovePackages.ps1       # Provisioned AppX packages to remove (bloatware)
+│           ├── SetColorTheme.ps1        # Applies Captured Motion desktop theme (themeA)
+│           └── ShowAllTrayIcons.xml     # NotificationSettings XML - forces all tray icons visible
 └── generator/
     └── .gitkeep                 # Placeholder for future web tool
 ```
