@@ -1,3 +1,9 @@
+[![Windows 11](https://img.shields.io/badge/Windows%2011-25H2-0078D4?logo=windows11&logoColor=white)]()
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE?logo=powershell&logoColor=white)]()
+[![winget](https://img.shields.io/badge/winget-apps-blue)]()
+[![Based on Schneegans](https://img.shields.io/badge/based%20on-Schneegans%20generator-lightgrey)](https://schneegans.de/windows/unattend-generator/)
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-lightgrey)](https://unlicense.org/)
+
 # AutoUnattend Windows Install
 
 Fully automated Windows 11 unattended installer based on the [Schneegans pe.cmd framework](https://schneegans.de/windows/unattend-generator/). Drop `autounattend.xml` into the root of a bootable USB drive - Windows Setup does the rest without user interaction.
@@ -33,13 +39,9 @@ autounattend/
 
 ---
 
-## What it does (el-toro config)
-
-> Detailed hardware notes and per-config specifics live in [configs/el-toro/README.md](configs/el-toro/README.md). What follows is a full technical overview of the automation.
-
----
-
 ## What it does
+
+> Hardware notes and per-config specifics: [configs/el-toro/README.md](configs/el-toro/README.md)
 
 ### Disk layout
 - GPT partition scheme (UEFI only - no legacy BIOS support)
@@ -117,10 +119,8 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 - Power: never sleep, never turn off display (suitable for always-on tower; adjust if needed)
 - Windows Update active hours: 8:00–23:00 (no forced restarts during work hours)
 - Edge: first-run experience hidden, background mode disabled, startup boost disabled
-
-### Audio
 - **Wake-on-LAN** enabled via registry (`*WakeOnMagicPacket`)
-- Drive letters: Disk 2 → D: (render NVMe), Disk 0 → E: (data SATA)
+- Drive letters: Disk 2 -> D: (render NVMe), Disk 0 -> E: (data SATA)
 
 ### Audio
 - Audio enhancements disabled on all playback devices (applied at first logon when devices are registered)
@@ -238,8 +238,6 @@ A small number of settings could not be fully automated:
 | winget upgrade after install | Runs automatically at first logon | Nothing to do |
 
 ---
-
-## Known limitations and caveats
 
 ## Known limitations
 
