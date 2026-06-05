@@ -1,6 +1,6 @@
 # AutoUnattend Windows Install
 
-Fully automated Windows 11 unattended installer based on the [Schneegans pe.cmd framework](https://schneegans.de/windows/unattend-generator/). Drop `autounattend.xml` into the root of a bootable USB drive — Windows Setup does the rest without user interaction.
+Fully automated Windows 11 unattended installer based on the [Schneegans pe.cmd framework](https://schneegans.de/windows/unattend-generator/). Drop `autounattend.xml` into the root of a bootable USB drive - Windows Setup does the rest without user interaction.
 
 This repository is structured to host multiple machine configs alongside a planned interactive generator tool.
 
@@ -8,13 +8,13 @@ This repository is structured to host multiple machine configs alongside a plann
 
 ```
 autounattend/
-├── README.md                    # This file — project overview + generator spec
+├── README.md                    # This file - project overview + generator spec
 ├── docs/
 │   └── discoveries.md           # Hard-won technical findings
 ├── configs/
 │   └── el-toro/
 │       ├── README.md            # EL_TORO hardware, what works, known issues
-│       ├── autounattend.xml     # Password scrubbed — set CHANGE_ME_PASSWORD before use
+│       ├── autounattend.xml     # Password scrubbed - set CHANGE_ME_PASSWORD before use
 │       ├── Greenshot.ini
 │       └── scripts/
 │           ├── Specialize.ps1
@@ -27,7 +27,7 @@ autounattend/
 ## Adding a new machine config
 
 1. Duplicate `configs/el-toro/` as `configs/<machine-name>/`
-2. Edit `autounattend.xml` — update disk number, computer name, locale, password
+2. Edit `autounattend.xml` - update disk number, computer name, locale, password
 3. Update scripts as needed for your hardware
 4. Document in `configs/<machine-name>/README.md`
 
@@ -42,14 +42,14 @@ autounattend/
 ## What it does
 
 ### Disk layout
-- GPT partition scheme (UEFI only — no legacy BIOS support)
+- GPT partition scheme (UEFI only - no legacy BIOS support)
 - 300 MB EFI partition, 16 MB MSR, Windows partition, 1 GB recovery partition
-- Targets **Disk 1** — verify this matches your intended drive before use. Boot from the USB, press Shift+F10 to open a command prompt, run `diskpart` then `list disk` to confirm disk numbering before proceeding. Change `SELECT DISK=1` and `<DiskID>1</DiskID>` in the XML if your target drive has a different number. **The script runs `CLEAN` on the selected disk — wrong disk number means data loss.**
+- Targets **Disk 1** - verify this matches your intended drive before use. Boot from the USB, press Shift+F10 to open a command prompt, run `diskpart` then `list disk` to confirm disk numbering before proceeding. Change `SELECT DISK=1` and `<DiskID>1</DiskID>` in the XML if your target drive has a different number. **The script runs `CLEAN` on the selected disk - wrong disk number means data loss.**
 
 ### Language and locale
 - UI language: **English (US)**
 - Regional settings (date format, decimal separator, units): **Polish (pl-PL)**
-- Keyboard: **Polish (programmers)** — single layout, no switcher
+- Keyboard: **Polish (programmers)** - single layout, no switcher
 - Timezone: **Central European Standard Time** (Warsaw, UTC+1/+2)
 
 ### Bloatware removed
@@ -59,7 +59,7 @@ Bing Search, Clipchamp, Cortana, Family Safety, Feedback Hub, Internet Explorer,
 Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 
 ### Privacy and telemetry
-- Telemetry set to level 1 (Basic) — lowest available on Home/Pro; level 0 is Enterprise-only and silently ignored on other editions
+- Telemetry set to level 1 (Basic) - lowest available on Home/Pro; level 0 is Enterprise-only and silently ignored on other editions
 - Advertising ID disabled
 - Bing search results removed from Start menu and Search (four registry keys covering all known suppression paths)
 - Copilot disabled system-wide and removed from taskbar
@@ -79,7 +79,7 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 - Widgets disabled
 - Copilot button hidden
 - Language bar hidden (single keyboard layout, no switcher needed)
-- All system tray icons always visible — no overflow/hidden icons
+- All system tray icons always visible - no overflow/hidden icons
 - Taskbar buttons: **combine only when taskbar is full** (not always combined)
 - Multi-monitor: apps shown only on the taskbar of the monitor they're on
 - "End Task" option enabled in taskbar right-click
@@ -88,8 +88,8 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 - File extensions shown
 - Hidden files shown
 - Explorer opens to **This PC** (not Quick Access)
-- All folders default to **Details view** with generic column layout (Name, Date Modified, Type, Size) — prevents music/audio folders auto-switching to the Music layout with different columns
-- Desktop icons: **This PC**, **User's Files**, **Recycle Bin** — no Network, no Control Panel shortcut
+- All folders default to **Details view** with generic column layout (Name, Date Modified, Type, Size) - prevents music/audio folders auto-switching to the Music layout with different columns
+- Desktop icons: **This PC**, **User's Files**, **Recycle Bin** - no Network, no Control Panel shortcut
 
 ### Start menu
 - Empty pinned list replaced with a custom 12-pin layout (2 rows of 6):
@@ -100,13 +100,13 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 | Git Bash | 7-Zip | WinDirStat | Greenshot | VS Code | VLC |
 
 - All folder shortcuts enabled (Settings, File Explorer, Documents, Downloads, Music, Pictures, Videos, Network, Personal folder)
-- "More pins" layout: **not automated** — set manually after install via Settings → Personalization → Start
+- "More pins" layout: **not automated** - set manually after install via Settings → Personalization → Start
 
 ### System configuration
 - Computer name: **EL-TORO**
-- Local account: **User** / `CHANGE_ME_PASSWORD` *(set before use — see [Customisation](#customisation))*
+- Local account: **User** / `CHANGE_ME_PASSWORD` *(set before use - see [Customisation](#customisation))*
 - Password never expires
-- **Remote Desktop enabled** with NLA (Network Level Authentication) — compatible with the Windows App on macOS
+- **Remote Desktop enabled** with NLA (Network Level Authentication) - compatible with the Windows App on macOS
 - RDP firewall rule opened
 - Developer Mode enabled
 - Long file paths enabled (>260 chars)
@@ -127,7 +127,7 @@ Windows capabilities removed: Internet Explorer, OneSync, Steps Recorder.
 - Exclusive mode left at default (available for DAW use)
 
 ### Development
-- **WSL2** Windows components pre-installed (no distro — install your preferred distro with `wsl --install Ubuntu` or similar)
+- **WSL2** Windows components pre-installed (no distro - install your preferred distro with `wsl --install Ubuntu` or similar)
 - WSL2 set as default version at first logon
 - **Git** installed via winget
 - **OpenSSH Server** installed post-logon, configured on port 41, firewall rule opened
@@ -149,9 +149,9 @@ All installed silently during setup, no interaction required:
 | PowerShell 7 | `Microsoft.PowerShell` |
 | HWiNFO64 | `REALiX.HWiNFO` |
 
-Python installs (direct download — winget `--scope machine` unreliable for Python):
-- **Python 3.13** — `InstallAllUsers=1 PrependPath=1`
-- **Python 2.7** — installed to `C:\Python27`, `python2` alias added
+Python installs (direct download - winget `--scope machine` unreliable for Python):
+- **Python 3.13** - `InstallAllUsers=1 PrependPath=1`
+- **Python 2.7** - installed to `C:\Python27`, `python2` alias added
 
 `InstallApps.ps1` runs as an elevated scheduled task 6 minutes after first logon. A `winget upgrade --all` runs at the end.
 
@@ -161,22 +161,22 @@ Python installs (direct download — winget `--scope machine` unreliable for Pyt
 
 ## Prerequisites
 
-- **UEFI-capable machine** — GPT layout only; no legacy BIOS/CSM support
-- **Internet connection during setup** — winget installs and WSL2 require network during the specialize pass
-- **Windows 11 25H2 ISO** — English International, 64-bit
+- **UEFI-capable machine** - GPT layout only; no legacy BIOS/CSM support
+- **Internet connection during setup** - winget installs and WSL2 require network during the specialize pass
+- **Windows 11 25H2 ISO** - English International, 64-bit
     - SHA256: `66B7B4B71763ED6F9B2CE29326ED9284544DA6F5283D00329921540C01AAAEEA`
-- **Bootable USB** created with [WinDiskWriter](https://github.com/TechUnRestricted/WinDiskWriter) in ExFAT mode — required, modern Win11 ISOs have `install.wim` > 4 GB (FAT32 can't hold it)
+- **Bootable USB** created with [WinDiskWriter](https://github.com/TechUnRestricted/WinDiskWriter) in ExFAT mode - required, modern Win11 ISOs have `install.wim` > 4 GB (FAT32 can't hold it)
 
 ---
 
 ## How to use
 
-1. Download Windows 11 25H2 ISO from [microsoft.com/software-download/windows11](https://www.microsoft.com/software-download/windows11) — **English International**, **64-bit**
+1. Download Windows 11 25H2 ISO from [microsoft.com/software-download/windows11](https://www.microsoft.com/software-download/windows11) - **English International**, **64-bit**
 2. Write ISO to USB with WinDiskWriter (ExFAT, UEFI boot, no Legacy BIOS sector)
-3. **Customise** — at minimum set your password (search `CHANGE_ME_PASSWORD` in the XML)
+3. **Customise** - at minimum set your password (search `CHANGE_ME_PASSWORD` in the XML)
 4. Copy `configs/el-toro/autounattend.xml` to the **root** of the USB drive
 5. Boot from USB, press `Shift+F10` → `diskpart` → `list disk` to confirm disk numbering before proceeding
-6. Reboot from USB — setup completes unattended
+6. Reboot from USB - setup completes unattended
 7. Wait ~6 minutes after first logon for `InstallApps.ps1` to complete
 8. Check `C:\Windows\Setup\Scripts\InstallApps.log` for status
 
@@ -213,7 +213,7 @@ These values are hardcoded and **must be changed** before use on a different mac
 Max 15 characters, no spaces, hyphens allowed.
 
 ### Username
-`User` also appears in file paths — `C:\Users\User\Pictures\Screenshots` (Greenshot save location in `Greenshot.ini` and `UserOnce.ps1`). Search and replace all occurrences if you change it.
+`User` also appears in file paths - `C:\Users\User\Pictures\Screenshots` (Greenshot save location in `Greenshot.ini` and `UserOnce.ps1`). Search and replace all occurrences if you change it.
 
 ### Locale and timezone
 Full timezone name list: [Microsoft docs](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones)
@@ -243,11 +243,11 @@ A small number of settings could not be fully automated:
 
 ## Known limitations
 
-- **Start menu pins** may silently fail for apps whose `.lnk` path doesn't match expectations. PowerToys has changed shortcut names between releases — check `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\`.
+- **Start menu pins** may silently fail for apps whose `.lnk` path doesn't match expectations. PowerToys has changed shortcut names between releases - check `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\`.
 - **VisiblePlaces binary** (Start menu folder shortcuts) was extracted from Windows 11 23H2. Shell GUIDs are stable across updates but the format could change in a major revision.
-- **Audio enhancements** are disabled at first logon. Devices added later are not covered — re-run the relevant registry entries or use the Sound control panel.
+- **Audio enhancements** are disabled at first logon. Devices added later are not covered - re-run the relevant registry entries or use the Sound control panel.
 - **Folder Details view** (`Mode=4`, `LogicalViewMode=1`) works on tested builds but the DWORD values are undocumented.
-- **Telemetry level 1** is the minimum on Home/Pro. Level 0 silently resets on these editions — not a bug.
+- **Telemetry level 1** is the minimum on Home/Pro. Level 0 silently resets on these editions - not a bug.
 
 See [docs/discoveries.md](docs/discoveries.md) for detailed technical findings and pe.cmd internals.
 
@@ -255,7 +255,7 @@ See [docs/discoveries.md](docs/discoveries.md) for detailed technical findings a
 
 ## Generator Tool Specification
 
-> Build target: static site at `bmroz.eu/tools/autounattend`. No backend — pure client-side JavaScript. Stack: vanilla JS or React, Tailwind CSS.
+> Build target: static site at `bmroz.eu/tools/autounattend`. No backend - pure client-side JavaScript. Stack: vanilla JS or React, Tailwind CSS.
 
 ### Problem being solved
 
@@ -278,7 +278,7 @@ The [Schneegans generator](https://schneegans.de/windows/unattend-generator/) pr
 #### 4. App installation
 - Checkbox list of winget packages (pre-populated with common tools)
 - Custom winget IDs field
-- Python 3 (yes/no) — uses direct python.org download
+- Python 3 (yes/no) - uses direct python.org download
 - Python 2.7 (yes/no)
 
 #### 5. Start menu pins
@@ -331,16 +331,16 @@ See [docs/discoveries.md](docs/discoveries.md) for full pe.cmd internals and oth
 
 **WSL2 components** are installed during the specialize pass which runs before the OOBE and requires internet access. If the machine has no network connection at install time, WSL2 installation will silently fail and can be completed manually afterwards with `wsl --install --no-distribution`.
 
-**Winget installs** also require internet during specialize. On a fresh ISO, winget itself may need a source update on first run — if apps fail to install, run `winget source update` and retry.
+**Winget installs** also require internet during specialize. On a fresh ISO, winget itself may need a source update on first run - if apps fail to install, run `winget source update` and retry.
 
 ---
 
 ## Acknowledgements
 
-Base answer file generated with [Schneegans Unattend Generator](https://schneegans.de/windows/unattend-generator/) — a well-maintained, thorough tool that handles the XML boilerplate and Schneegans extension mechanism correctly.
+Base answer file generated with [Schneegans Unattend Generator](https://schneegans.de/windows/unattend-generator/) - a well-maintained, thorough tool that handles the XML boilerplate and Schneegans extension mechanism correctly.
 
 ---
 
 ## Licence
 
-Do whatever you want with it. No warranty expressed or implied — test on a machine you can afford to wipe.
+Do whatever you want with it. No warranty expressed or implied - test on a machine you can afford to wipe.

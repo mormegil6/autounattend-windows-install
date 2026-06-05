@@ -10,19 +10,19 @@ The Schneegans framework builds `assert.vbs` incrementally via RunSynchronous `e
 
 **Order dependencies are non-obvious:**
 - Order 14 opens `If actual > expected Then` for the disk size check
-- Order 15 must close it with `End If` — removing Order 15 entirely breaks the VBScript
+- Order 15 must close it with `End If` - removing Order 15 entirely breaks the VBScript
 - Correct approach: replace Order 15 content but keep the `End If`
 
 **XML escaping:**
 - The `>>` operator in Order Path values must be XML-escaped as `&gt;&gt;`
-- Bare `>>` in a `<Path>` element causes immediate boot failure — no error message, setup just halts
+- Bare `>>` in a `<Path>` element causes immediate boot failure - no error message, setup just halts
 
 ---
 
 ## diskpart sequence
 
-- `SHRINK` before `FORMAT` is valid and intentional — diskpart shrinks raw partitions by adjusting partition table entries, not requiring a formatted filesystem
-- `CLEAN` is already in the diskpart layout file — the "no partitions" assertion in `assert.vbs` can be removed safely (just keep the size/type assertions)
+- `SHRINK` before `FORMAT` is valid and intentional - diskpart shrinks raw partitions by adjusting partition table entries, not requiring a formatted filesystem
+- `CLEAN` is already in the diskpart layout file - the "no partitions" assertion in `assert.vbs` can be removed safely (just keep the size/type assertions)
 
 ---
 
@@ -30,9 +30,9 @@ The Schneegans framework builds `assert.vbs` incrementally via RunSynchronous `e
 
 - `packagedAppID` in `ConfigureStartPins` is unreliable for existing profiles
 - `desktopAppLink` with `.lnk` files works reliably for installed apps
-- For UWP apps (Calculator, Notepad, Terminal): use `LayoutModification.json` placed in `C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\` — this is read at profile creation time
-- Deleting `start2.bin` + restarting `StartMenuExperienceHost` regenerates from ConfigureStartPins, but also resets `VisiblePlaces` — re-apply VisiblePlaces **after** the Explorer restart, not before
-- `ConfigureTaskbarPins` must be set in HKLM — embed the XML as Base64 to avoid XML-escaping-inside-XML issues
+- For UWP apps (Calculator, Notepad, Terminal): use `LayoutModification.json` placed in `C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\` - this is read at profile creation time
+- Deleting `start2.bin` + restarting `StartMenuExperienceHost` regenerates from ConfigureStartPins, but also resets `VisiblePlaces` - re-apply VisiblePlaces **after** the Explorer restart, not before
+- `ConfigureTaskbarPins` must be set in HKLM - embed the XML as Base64 to avoid XML-escaping-inside-XML issues
 
 ---
 
@@ -51,7 +51,7 @@ $ico = [System.Drawing.Icon]::FromHandle($bmp.GetHicon())
 
 ## UserOnce.ps1 brace structure
 
-The Schneegans script uses `@( { }; { }; ... )` block arrays. An unclosed brace causes PowerShell to silently refuse to parse the entire file — nothing in UserOnce runs, no error shown. The log file for UserOnce doesn't exist by design (it runs via RunOnce, not pe.cmd).
+The Schneegans script uses `@( { }; { }; ... )` block arrays. An unclosed brace causes PowerShell to silently refuse to parse the entire file - nothing in UserOnce runs, no error shown. The log file for UserOnce doesn't exist by design (it runs via RunOnce, not pe.cmd).
 
 ---
 
@@ -91,7 +91,7 @@ Chrome recreates its desktop shortcut after post-install background tasks run. A
 
 The binary value written to `HKCU\Software\Microsoft\Windows\CurrentVersion\Start\VisiblePlaces` encodes internal Windows Shell GUIDs. It was extracted from a Windows 11 23H2 reference machine. The GUIDs are stable across minor updates but the binary format could theoretically change in a major Windows revision.
 
-Re-apply VisiblePlaces **after** any Explorer restart — Explorer restart resets this value.
+Re-apply VisiblePlaces **after** any Explorer restart - Explorer restart resets this value.
 
 ---
 
